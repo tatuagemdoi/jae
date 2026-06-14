@@ -1,0 +1,133 @@
+<section class="screen" id="screen-clube">
+  <div class="app-bar solid">
+    <button class="back" onclick="navigate('home')">‹</button>
+    <span class="title">Clube Jaé</span>
+    <span class="spacer"></span>
+    <button class="icon-btn" onclick="showToast('Tá precisando de ajuda?')">?</button>
+  </div>
+
+  <!-- Header pontos + nível -->
+  <div class="card mt-2">
+    <div class="row between">
+      <div>
+        <div class="card-sub">Seus pontos</div>
+        <div class="row gap-2" style="align-items:baseline">
+          <span class="amount" style="font-size:30px">1.250</span>
+          <span class="muted small">pts</span>
+        </div>
+      </div>
+      <span class="badge yellow">Nível Prata</span>
+    </div>
+
+    <div class="mt-3">
+      <div class="row between small muted mb-2">
+        <span class="bold" style="color:var(--ink)">Prata</span>
+        <span>Faltam 250 pts para o Ouro</span>
+      </div>
+      <div class="progress yellow"><div class="bar" style="width:71%"></div></div>
+    </div>
+  </div>
+
+  <!-- Missões -->
+  <div class="section-head mt-4">
+    <h2>Missões</h2>
+    <a onclick="showToast('Em breve: mais missões!')">ver todas</a>
+  </div>
+  <p class="small muted mb-3">Complete missões e ganhe pontos toda semana.</p>
+
+  <div class="list">
+    <div class="mission-row">
+      <span class="check">○</span>
+      <div class="body">
+        <div class="t">Faça 5 viagens esta semana</div>
+        <div class="s">3 de 5 viagens · termina domingo</div>
+      </div>
+      <span class="pts">+50</span>
+    </div>
+    <div class="mission-row">
+      <span class="check">○</span>
+      <div class="body">
+        <div class="t">Recarregue via PIX</div>
+        <div class="s">Recarregue qualquer valor pelo PIX</div>
+      </div>
+      <span class="pts">+30</span>
+    </div>
+    <div class="mission-row done">
+      <span class="check">✓</span>
+      <div class="body">
+        <div class="t">Pague uma tarifa por QR Code</div>
+        <div class="s">Concluída · pontos creditados</div>
+      </div>
+      <span class="pts">+20</span>
+    </div>
+    <div class="mission-row">
+      <span class="check">○</span>
+      <div class="body">
+        <div class="t">Use 2 modais diferentes</div>
+        <div class="s">BRT, VLT, ônibus, vans ou cabritinhos · 1 de 2</div>
+      </div>
+      <span class="pts">+40</span>
+    </div>
+  </div>
+
+  <!-- Recompensas -->
+  <div class="section-head mt-4">
+    <h2>Recompensas</h2>
+    <a onclick="showToast('Catálogo completo em breve!')">ver todas</a>
+  </div>
+  <p class="small muted mb-3">Troque seus pontos por bônus e descontos.</p>
+
+  <div class="reward-card">
+    <span class="thumb">💰</span>
+    <div class="body">
+      <div class="t">R$ 5 de bônus no saldo</div>
+      <div class="s">Crédito que não expira, na hora</div>
+    </div>
+    <span class="cost">500 pts</span>
+  </div>
+
+  <div class="reward-card">
+    <span class="thumb">🎟️</span>
+    <div class="body">
+      <div class="t">R$ 10 de bônus no saldo</div>
+      <div class="s">Mais viagens pelo Rio</div>
+    </div>
+    <span class="cost">950 pts</span>
+  </div>
+
+  <div class="reward-card">
+    <span class="thumb">🏷️</span>
+    <div class="body">
+      <div class="t">Desconto parceiro</div>
+      <div class="s">15% em lojas e cafés parceiros</div>
+    </div>
+    <span class="cost">400 pts</span>
+  </div>
+
+  <div class="reward-card">
+    <span class="thumb">🎬</span>
+    <div class="body">
+      <div class="t">Cupom de cinema</div>
+      <div class="s">Ingresso com desconto na rede parceira</div>
+    </div>
+    <span class="cost">700 pts</span>
+  </div>
+
+  <button class="btn btn-yellow btn-block btn-lg mt-3 mb-4" onclick="showToast('Resgate disponível em breve!')">Resgatar recompensa</button>
+
+  <div class="bottom-nav">
+    <a class="nav-item" data-nav="home" onclick="navigate('home')">
+      <span class="ico">🏠</span><span>Início</span>
+    </a>
+    <a class="nav-item" data-nav="extrato" onclick="navigate('extrato')">
+      <span class="ico">📄</span><span>Extrato</span>
+    </a>
+    <button class="nav-pay" onclick="navigate('pay')"><span class="ico">⬛</span><span class="label">Pagar</span></button>
+    <a class="nav-item" data-nav="cartao" onclick="navigate('cartao')">
+      <span class="ico">💳</span><span>Cartão</span>
+    </a>
+    <a class="nav-item active" data-nav="clube" onclick="navigate('clube')">
+      <span class="ico">⭐</span><span>Clube</span>
+    </a>
+  </div>
+</section>

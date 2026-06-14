@@ -1,0 +1,80 @@
+<section class="screen" id="screen-extrato">
+  <div class="app-bar solid">
+    <button class="back" onclick="navigate('home')">‹</button>
+    <div class="title">Extrato</div>
+    <div class="spacer"></div>
+    <button class="icon-btn" onclick="openSheet('filtro-extrato')">⛃</button>
+  </div>
+
+  <div class="card row between mb-3">
+    <div>
+      <div class="card-sub">Saldo disponível</div>
+      <div class="card-title">R$ 50,90</div>
+    </div>
+    <span class="badge green">Não expira</span>
+  </div>
+
+  <div class="txn-date">Hoje, 14 de junho</div>
+  <div class="list mb-4">
+    <div class="txn-row">
+      <span class="ico blue">🚍</span>
+      <div class="body">
+        <div class="t">BRT — Estação Alvorada</div>
+        <div class="s">14:32 · Pago por QR Code</div>
+      </div>
+      <div class="amt out">−R$ 4,30</div>
+    </div>
+    <div class="txn-row">
+      <span class="ico blue">🚊</span>
+      <div class="body">
+        <div class="t">VLT — Carioca</div>
+        <div class="s">11:07 · Pago por QR Code</div>
+      </div>
+      <div class="amt out">−R$ 4,30</div>
+    </div>
+    <div class="txn-row">
+      <span class="ico green">💰</span>
+      <div class="body">
+        <div class="t">Recarga via PIX</div>
+        <div class="s">08:45 · Disponível na hora</div>
+      </div>
+      <div class="amt in">+R$ 50,00</div>
+    </div>
+  </div>
+
+  <div class="txn-date">Ontem, 13 de junho</div>
+  <div class="list mb-4">
+    <div class="txn-row">
+      <span class="ico blue">🚌</span>
+      <div class="body">
+        <div class="t">Ônibus — Linha 309 (SPPO)</div>
+        <div class="s">18:50 · Pago por QR Code</div>
+      </div>
+      <div class="amt out">−R$ 4,30</div>
+    </div>
+    <div class="txn-row">
+      <span class="ico blue">🚍</span>
+      <div class="body">
+        <div class="t">BRT — Estação Madureira</div>
+        <div class="s">07:58 · Pago por QR Code</div>
+      </div>
+      <div class="amt out">−R$ 4,30</div>
+    </div>
+  </div>
+
+  <div class="modal" id="filtro-extrato">
+    <div class="sheet">
+      <div class="grabber"></div>
+      <div class="sheet-title">Filtrar extrato</div>
+      <div class="sheet-sub">Escolha o período que deseja visualizar.</div>
+      <div class="chip-row mt-3">
+        <span class="chip selected" onclick="selectChip(this)">Tudo</span>
+        <span class="chip" onclick="selectChip(this)">Viagens</span>
+        <span class="chip" onclick="selectChip(this)">Recargas</span>
+        <span class="chip" onclick="selectChip(this)">Últimos 7 dias</span>
+        <span class="chip" onclick="selectChip(this)">Últimos 30 dias</span>
+      </div>
+      <button class="btn btn-primary btn-block btn-lg mt-4" onclick="closeSheet('filtro-extrato')">Aplicar filtro</button>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,58 @@
+<section class="screen" id="screen-cartoes">
+  <div class="app-bar solid">
+    <button class="back" onclick="navigate('home')">‹</button>
+    <div class="title">Meus cartões</div>
+    <div class="spacer"></div>
+    <button class="icon-btn" onclick="showToast('Tá precisando de ajuda?')">?</button>
+  </div>
+
+  <div class="section-head">
+    <h2>Cartão principal</h2>
+    <a onclick="navigate('extrato')">Ver extrato</a>
+  </div>
+
+  <div class="balance-card">
+    <div class="row between">
+      <span class="label">Jaé Virtual</span>
+      <span class="badge green">Ativo</span>
+    </div>
+    <div class="amount">R$ 42,80</div>
+    <div class="hint">•••• 7204 · Saldo não expira</div>
+    <div class="row gap-2 mt-3">
+      <button class="btn btn-ghost btn-sm" onclick="showToast('Cartão bloqueado')">🔒 Bloquear</button>
+      <button class="btn btn-ghost btn-sm" onclick="showToast('2ª via solicitada')">📄 2ª via</button>
+    </div>
+  </div>
+
+  <div class="section-head mt-4">
+    <h2>Cartão infantil</h2>
+    <a onclick="navigate('extrato')">Ver extrato</a>
+  </div>
+
+  <div class="card">
+    <div class="row between">
+      <div class="row gap-3">
+        <span class="ico yellow">🧒</span>
+        <div class="body">
+          <div class="card-title">Jaézinho</div>
+          <div class="card-sub">•••• 1138 · Sofia Pires</div>
+        </div>
+      </div>
+      <span class="badge yellow">Infantil</span>
+    </div>
+    <div class="divider"></div>
+    <div class="row between">
+      <div>
+        <div class="small muted">Saldo</div>
+        <div class="bold">R$ 15,00</div>
+      </div>
+      <div class="row gap-2">
+        <button class="btn btn-ghost btn-sm" onclick="showToast('Cartão bloqueado')">🔒 Bloquear</button>
+        <button class="btn btn-ghost btn-sm" onclick="showToast('2ª via solicitada')">📄 2ª via</button>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn btn-primary btn-block btn-lg mt-4" onclick="showToast('Vamos adicionar um cartão')">➕ Adicionar cartão</button>
+  <p class="text-center muted small mt-2 mb-4">Solicite o Jaé físico, virtual ou o Jaézinho.</p>
+</section>

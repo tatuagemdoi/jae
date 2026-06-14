@@ -1,0 +1,103 @@
+<section class="screen" id="screen-pagar">
+  <header class="app-bar solid">
+    <button class="back" onclick="navigate('home')">‹</button>
+    <span class="title">Pagar</span>
+    <span class="spacer"></span>
+    <button class="icon-btn" onclick="showToast('Tá precisando de ajuda?')">?</button>
+  </header>
+
+  <div class="chip-row mb-3">
+    <span class="chip selected" onclick="selectChip(this)">🚌 Ônibus</span>
+    <span class="chip" onclick="selectChip(this)">🚍 BRT</span>
+    <span class="chip" onclick="selectChip(this)">🚊 VLT</span>
+    <span class="chip" onclick="selectChip(this)">🚐 Van</span>
+  </div>
+
+  <div class="qr-card">
+    <div class="qr">
+      <svg viewBox="0 0 200 200" width="200" height="200" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
+        <rect width="200" height="200" fill="#fff"/>
+        <g fill="#14171A">
+          <rect x="10" y="10" width="50" height="50"/>
+          <rect x="20" y="20" width="30" height="30" fill="#fff"/>
+          <rect x="28" y="28" width="14" height="14"/>
+          <rect x="140" y="10" width="50" height="50"/>
+          <rect x="150" y="20" width="30" height="30" fill="#fff"/>
+          <rect x="158" y="28" width="14" height="14"/>
+          <rect x="10" y="140" width="50" height="50"/>
+          <rect x="20" y="150" width="30" height="30" fill="#fff"/>
+          <rect x="28" y="158" width="14" height="14"/>
+          <rect x="72" y="10" width="10" height="10"/>
+          <rect x="92" y="10" width="10" height="10"/>
+          <rect x="112" y="20" width="10" height="10"/>
+          <rect x="82" y="30" width="10" height="10"/>
+          <rect x="102" y="40" width="10" height="10"/>
+          <rect x="72" y="50" width="10" height="10"/>
+          <rect x="122" y="50" width="10" height="10"/>
+          <rect x="10" y="72" width="10" height="10"/>
+          <rect x="30" y="72" width="10" height="10"/>
+          <rect x="50" y="82" width="10" height="10"/>
+          <rect x="70" y="72" width="10" height="10"/>
+          <rect x="90" y="82" width="10" height="10"/>
+          <rect x="110" y="72" width="10" height="10"/>
+          <rect x="130" y="82" width="10" height="10"/>
+          <rect x="150" y="72" width="10" height="10"/>
+          <rect x="170" y="82" width="10" height="10"/>
+          <rect x="20" y="102" width="10" height="10"/>
+          <rect x="40" y="112" width="10" height="10"/>
+          <rect x="62" y="102" width="10" height="10"/>
+          <rect x="82" y="112" width="10" height="10"/>
+          <rect x="102" y="102" width="10" height="10"/>
+          <rect x="122" y="112" width="10" height="10"/>
+          <rect x="142" y="102" width="10" height="10"/>
+          <rect x="162" y="112" width="10" height="10"/>
+          <rect x="72" y="130" width="10" height="10"/>
+          <rect x="92" y="140" width="10" height="10"/>
+          <rect x="112" y="150" width="10" height="10"/>
+          <rect x="132" y="140" width="10" height="10"/>
+          <rect x="152" y="150" width="10" height="10"/>
+          <rect x="172" y="140" width="10" height="10"/>
+          <rect x="82" y="160" width="10" height="10"/>
+          <rect x="102" y="170" width="10" height="10"/>
+          <rect x="122" y="172" width="10" height="10"/>
+          <rect x="142" y="172" width="10" height="10"/>
+          <rect x="162" y="162" width="10" height="10"/>
+        </g>
+      </svg>
+    </div>
+    <div class="title">Aproxime do validador</div>
+    <div class="sub">Toque o celular no leitor para validar sua passagem</div>
+  </div>
+
+  <div class="card text-center mt-4">
+    <div class="card-sub">Tarifa atual · Ônibus (SPPO)</div>
+    <div class="amount bold" style="font-size:32px">R$ 4,30</div>
+    <div class="small muted">Saldo disponível: R$ 38,60</div>
+  </div>
+
+  <div class="row gap-2 mt-4">
+    <button class="btn btn-yellow btn-block" onclick="navigate('recarga')">Recarregar saldo</button>
+  </div>
+
+  <button class="btn btn-ghost btn-block mt-3" onclick="navigate('cartoes')">Usar cartão físico</button>
+
+  <p class="small muted text-center mt-4 mb-4">Seu saldo Jaé não expira. Vem ser Jaé! 💛</p>
+
+  <div class="modal" id="confirm-pagar">
+    <div class="sheet">
+      <div class="grabber"></div>
+      <div class="sheet-title">Confirmar pagamento</div>
+      <div class="sheet-sub">Tarifa de ônibus no valor de R$ 4,30</div>
+      <button class="btn btn-primary btn-block mt-3" onclick="closeSheet('confirm-pagar'); showToast('Passagem validada! Boa viagem 🚌')">Confirmar</button>
+      <button class="btn btn-outline btn-block mt-2" onclick="closeSheet('confirm-pagar')">Cancelar</button>
+    </div>
+  </div>
+
+  <nav class="bottom-nav">
+    <a class="nav-item" data-nav="home" onclick="navigate('home')"><span class="ico">🏠</span><span>Início</span></a>
+    <a class="nav-item" data-nav="extrato" onclick="navigate('extrato')"><span class="ico">📃</span><span>Extrato</span></a>
+    <a class="nav-pay active" onclick="navigate('pagar')">⊞</a>
+    <a class="nav-item" data-nav="cartoes" onclick="navigate('cartoes')"><span class="ico">💳</span><span>Cartões</span></a>
+    <a class="nav-item" data-nav="clube" onclick="navigate('clube')"><span class="ico">🎁</span><span>Clube</span></a>
+  </nav>
+</section>
