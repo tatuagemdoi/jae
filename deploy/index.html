@@ -144,6 +144,10 @@ img { max-width: 100%; display: block; }
 .logo { font-weight: 700; font-size: 26px; letter-spacing: -.5px; color: var(--primary); }
 .logo.on-blue { color: #fff; }
 .logo.lg { font-size: 40px; }
+/* logo em imagem (asset oficial da Jaé) */
+.logo-img { height: 30px; width: auto; display: inline-block; }
+.logo-img.lg { height: 54px; }
+.logo-inline { height: 15px; width: auto; vertical-align: -2px; margin-right: 3px; }
 
 /* ----------------------------- BOTTOM NAV ------------------------------- */
 .bottom-nav {
@@ -205,7 +209,7 @@ img { max-width: 100%; display: block; }
 
 /* ----------------------------- BALANCE CARD ----------------------------- */
 .balance-card {
-  background: linear-gradient(135deg, #65BC7B 0%, #2E7BFF 55%, #4A9A5E 100%);
+  background: linear-gradient(135deg, #65BC7B 0%, #2ED5C4 55%, #4A9A5E 100%);
   color: #fff;
   border-radius: var(--r-lg);
   padding: var(--s-5);
@@ -369,7 +373,7 @@ img { max-width: 100%; display: block; }
 
 /* ------------------------------ PROGRESS -------------------------------- */
 .progress { height: 10px; border-radius: var(--r-pill); background: var(--gray-100); overflow: hidden; }
-.progress .bar { height: 100%; border-radius: var(--r-pill); background: linear-gradient(90deg, var(--primary), #2E7BFF); }
+.progress .bar { height: 100%; border-radius: var(--r-pill); background: linear-gradient(90deg, var(--primary), #2ED5C4); }
 .progress.yellow .bar { background: linear-gradient(90deg, var(--yellow), #FFE45C); }
 
 /* ------------------------- CLUBE / REWARDS ------------------------------ */
@@ -500,7 +504,7 @@ img { max-width: 100%; display: block; }
 <!-- ===================== TELA: ONBOARDING ===================== -->
 <section class="screen full no-pad active" id="screen-onboarding">
   <div class="hero">
-    <div class="logo on-blue lg mb-4">Jaé</div>
+    <img class="logo-img lg mb-4" src="assets/logo-jae-white.webp" alt="Jaé">
     <div class="art">🚌</div>
     <h1>Vem ser Jaé</h1>
     <p>Pague sua passagem pelo celular, recarregue na hora e use em todo o transporte do Rio: BRT, VLT, ônibus e vans.</p>
@@ -886,7 +890,7 @@ img { max-width: 100%; display: block; }
 
   <div class="balance-card">
     <div class="row between">
-      <span class="label">Jaé Virtual</span>
+      <span class="label"><img class="logo-inline" src="assets/logo-jae-white.webp" alt="Jaé"> Virtual</span>
       <span class="badge green">Ativo</span>
     </div>
     <div class="amount">R$ 42,80</div>
