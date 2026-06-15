@@ -463,6 +463,34 @@ img { max-width: 100%; display: block; }
 .hero p { font-size: 15px; opacity: .9; max-width: 280px; }
 .hero .art { font-size: 72px; }
 .hero .actions { margin-top: var(--s-8); width: 100%; display: flex; flex-direction: column; gap: var(--s-3); }
+
+/* ----------------------- GUIA DA CIDADE / EVENTOS ----------------------- */
+/* Placeholders de imagem: trocar os .thumb pela imagem real (ver TODO no HTML) */
+.city-hero {
+  position: relative; border-radius: var(--r-lg); overflow: hidden;
+  min-height: 180px; display: flex; flex-direction: column; justify-content: flex-end;
+  padding: var(--s-4); color: #fff; box-shadow: var(--shadow-md);
+  /* TODO: substituir o gradiente por background:url(assets/eventos/<destaque>.jpg) center/cover */
+  background: linear-gradient(180deg, rgba(20,23,26,0) 25%, rgba(20,23,26,.82) 100%), linear-gradient(135deg, #65BC7B, #2ED5C4);
+}
+.city-hero .badge-cat { align-self: flex-start; background: var(--yellow); color: #5a4400; font-weight: 700; font-size: 11px; padding: 4px 10px; border-radius: var(--r-pill); margin-bottom: var(--s-2); }
+.city-hero h3 { font-size: 19px; font-weight: 700; line-height: 1.2; }
+.city-hero .meta { font-size: 13px; opacity: .92; margin-top: 2px; }
+
+.event { display: flex; gap: var(--s-3); padding: var(--s-3); background: var(--surface); border: 1px solid var(--gray-100); border-radius: var(--r-md); box-shadow: var(--shadow-sm); align-items: center; }
+.event + .event { margin-top: var(--s-3); }
+.event .thumb {
+  width: 64px; height: 64px; flex: none; border-radius: var(--r-sm);
+  display: grid; place-items: center; font-size: 26px; color: #fff;
+  /* TODO: trocar por <img src="assets/eventos/<slug>.jpg"> 64x64 */
+  background: linear-gradient(135deg, var(--primary), var(--primary-700));
+}
+.event .info { flex: 1; min-width: 0; }
+.event .info .t { font-weight: 600; font-size: 15px; }
+.event .info .s { font-size: 12.5px; color: var(--gray); margin-top: 2px; }
+.event .price { text-align: right; flex: none; }
+.event .price .v { font-weight: 700; font-size: 14px; }
+.event .price .free { color: var(--green); font-weight: 700; font-size: 13px; }
   </style>
 </head>
 <body>
@@ -547,7 +575,18 @@ img { max-width: 100%; display: block; }
     </div>
   </div>
 
-  <div class="text-center muted small mt-5 mb-4">Vem ser Jaé 💙</div>
+  <div class="section-head mt-5">
+    <h2>Acontece no Rio</h2>
+    <a onclick="navigate('cidade')">ver tudo</a>
+  </div>
+  <div class="city-hero" onclick="navigate('cidade')" style="cursor:pointer">
+    <span class="badge-cat">🎶 Show</span>
+    <h3>Festival de Verão · Marina da Glória</h3>
+    <div class="meta">Sáb, 28 jun · a partir de R$ 80 · ingressos pelo app</div>
+  </div>
+  <p class="small muted text-center mt-3">Descubra rolês, gastronomia e cultura — e pague a ida com a Jaé 🎟️</p>
+
+  <div class="text-center muted small mt-5 mb-4">Vem ser Jaé 💚</div>
 </section>
 
 <!-- ===================== TELA: PAGAR ===================== -->
@@ -1114,6 +1153,116 @@ img { max-width: 100%; display: block; }
       </div>
     </div>
   </div>
+</section>
+
+<!-- ===================== TELA: CIDADE / GUIA ===================== -->
+<!-- TODO(imagens): trocar os placeholders .thumb/.city-hero pelas imagens reais
+     da pasta que você vai subir (eventos, capas, etc.). O logo oficial em PNG
+     pode entrar na app-bar/onboarding. -->
+<section class="screen" id="screen-cidade">
+  <div class="app-bar solid">
+    <button class="back" onclick="navigate('inicio')" aria-label="Voltar">‹</button>
+    <span class="title">Acontece no Rio</span>
+    <span class="spacer"></span>
+    <button class="icon-btn" onclick="showToast('Busca em breve')">🔍</button>
+  </div>
+
+  <div class="chip-row mb-4">
+    <span class="chip selected" onclick="selectChip(this)">Tudo</span>
+    <span class="chip" onclick="selectChip(this)">🎶 Shows</span>
+    <span class="chip" onclick="selectChip(this)">🍽️ Gastronomia</span>
+    <span class="chip" onclick="selectChip(this)">🎭 Cultura</span>
+    <span class="chip" onclick="selectChip(this)">⚽ Esporte</span>
+  </div>
+
+  <!-- destaque -->
+  <div class="city-hero mb-2">
+    <span class="badge-cat">🎶 Show</span>
+    <h3>Festival de Verão · Marina da Glória</h3>
+    <div class="meta">Sáb, 28 jun · 18h · a partir de R$ 80</div>
+  </div>
+  <button class="btn btn-primary btn-block mb-4" onclick="openSheet('comprar-ingresso')">🎟️ Comprar ingresso</button>
+
+  <div class="section-head">
+    <h2>Em destaque</h2>
+    <a onclick="showToast('Lista completa em breve')">ver tudo</a>
+  </div>
+
+  <div class="mb-4">
+    <div class="event">
+      <div class="thumb">🎭</div>
+      <div class="info">
+        <div class="t">Mostra de Teatro · Theatro Municipal</div>
+        <div class="s">Qui, 19 jun · 20h · Centro</div>
+      </div>
+      <div class="price"><div class="v">R$ 40</div></div>
+    </div>
+    <div class="event">
+      <div class="thumb">🍽️</div>
+      <div class="info">
+        <div class="t">Feira Gastronômica · Jardim Botânico</div>
+        <div class="s">Dom, 22 jun · 12h · entrada gratuita</div>
+      </div>
+      <div class="price"><div class="free">Grátis</div></div>
+    </div>
+    <div class="event">
+      <div class="thumb">🎶</div>
+      <div class="info">
+        <div class="t">Roda de Samba · Pedra do Sal</div>
+        <div class="s">Sex, 20 jun · 19h · Saúde</div>
+      </div>
+      <div class="price"><div class="v">R$ 25</div></div>
+    </div>
+    <div class="event">
+      <div class="thumb">⚽</div>
+      <div class="info">
+        <div class="t">Fla x Flu · Maracanã</div>
+        <div class="s">Sáb, 28 jun · 16h · Maracanã</div>
+      </div>
+      <div class="price"><div class="v">R$ 60</div></div>
+    </div>
+  </div>
+
+  <div class="card mb-4" style="background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff">
+    <div class="card-title" style="color:#fff">Vai de Jaé 🚌</div>
+    <div class="card-sub" style="color:rgba(255,255,255,.9)">Comprou ingresso? A gente te mostra a melhor rota e você paga a passagem aqui mesmo.</div>
+    <button class="btn btn-yellow btn-block mt-3" onclick="navigate('pagar')">Ver rota e pagar passagem</button>
+  </div>
+
+  <!-- sheet de compra de ingresso -->
+  <div class="modal" id="comprar-ingresso">
+    <div class="sheet">
+      <div class="grabber"></div>
+      <div class="sheet-title">Festival de Verão</div>
+      <div class="sheet-sub">Marina da Glória · Sáb, 28 jun · 18h</div>
+
+      <div class="chip-row mt-3 mb-3">
+        <span class="chip selected" onclick="selectChip(this)">1 ingresso</span>
+        <span class="chip" onclick="selectChip(this)">2</span>
+        <span class="chip" onclick="selectChip(this)">3</span>
+        <span class="chip" onclick="selectChip(this)">4</span>
+      </div>
+
+      <div class="card mb-3">
+        <div class="row between"><span class="muted">1 × Inteira</span><span class="bold">R$ 80,00</span></div>
+        <div class="divider"></div>
+        <div class="row between"><span class="muted">Taxa de serviço</span><span class="bold">R$ 8,00</span></div>
+        <div class="divider"></div>
+        <div class="row between"><span class="bold">Total</span><span class="bold">R$ 88,00</span></div>
+      </div>
+
+      <button class="btn btn-primary btn-block" onclick="closeSheet('comprar-ingresso'); showToast('Ingresso comprado! 🎟️ Disponível em Meus ingressos')">Pagar com Pix</button>
+      <button class="btn btn-outline btn-block mt-2" onclick="closeSheet('comprar-ingresso')">Cancelar</button>
+    </div>
+  </div>
+
+  <nav class="bottom-nav">
+    <a class="nav-item" data-nav="inicio" onclick="navigate('inicio')"><span class="ico">🏠</span><span>Início</span></a>
+    <a class="nav-item" data-nav="extrato" onclick="navigate('extrato')"><span class="ico">📃</span><span>Extrato</span></a>
+    <a class="nav-pay" onclick="navigate('pagar')">⊞</a>
+    <a class="nav-item" data-nav="cartoes" onclick="navigate('cartoes')"><span class="ico">💳</span><span>Cartões</span></a>
+    <a class="nav-item active" data-nav="cidade" onclick="navigate('cidade')"><span class="ico">🎟️</span><span>Cidade</span></a>
+  </nav>
 </section>
 
     </div><!-- /.app-body -->
