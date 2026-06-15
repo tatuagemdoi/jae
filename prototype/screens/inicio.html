@@ -1,0 +1,65 @@
+<section class="screen" id="screen-inicio">
+  <div class="app-bar">
+    <div class="col" style="gap:2px">
+      <span class="small muted">Bom dia</span>
+      <span class="title bold" style="text-align:left">Olá, Ana 👋</span>
+    </div>
+    <span class="spacer"></span>
+    <button class="icon-btn" onclick="showToast('Você não tem novas notificações')">🔔</button>
+  </div>
+
+  <div class="balance-card">
+    <div class="label">Saldo disponível</div>
+    <div class="amount">R$ 47,50</div>
+    <div class="hint">Seu saldo não expira ✨</div>
+    <div class="row mt-3">
+      <button class="btn btn-yellow btn-sm" onclick="navigate('recarregar')">⚡ Recarregar</button>
+      <button class="btn btn-ghost btn-sm" onclick="navigate('pagar')">Pagar</button>
+    </div>
+  </div>
+
+  <div class="quick-actions mt-4">
+    <div class="quick-action" onclick="navigate('recarregar')">
+      <span class="ico blue">⚡</span>
+      <span>Recarregar</span>
+    </div>
+    <div class="quick-action" onclick="navigate('pagar')">
+      <span class="ico blue">📲</span>
+      <span>Pagar</span>
+    </div>
+    <div class="quick-action" onclick="navigate('cartoes')">
+      <span class="ico yellow">💳</span>
+      <span>Cartões</span>
+    </div>
+    <div class="quick-action" onclick="navigate('extrato')">
+      <span class="ico blue">📄</span>
+      <span>Extrato</span>
+    </div>
+  </div>
+
+  <div class="section-head mt-5">
+    <h2>Última viagem</h2>
+    <a onclick="navigate('extrato')">ver todos</a>
+  </div>
+  <div class="txn-date">Hoje, 14 de junho</div>
+  <div class="txn-row">
+    <span class="ico">🚌</span>
+    <div class="body">
+      <div class="t">BRT • Transoeste</div>
+      <div class="s">Hoje às 08:12 · Tarifa única</div>
+    </div>
+    <div class="amt out">−R$ 4,30</div>
+  </div>
+
+  <div class="card mt-5" onclick="navigate('clube')" style="background:linear-gradient(135deg,var(--blue),var(--blue-700));color:#fff;cursor:pointer">
+    <div class="row between">
+      <div class="col" style="gap:4px">
+        <div class="card-title" style="color:#fff">Clube Jaé ⭐</div>
+        <div class="card-sub" style="color:rgba(255,255,255,.85)">Você tem 1.250 pontos · troque por recargas</div>
+      </div>
+      <span class="chev" style="color:#fff">›</span>
+    </div>
+  </div>
+
+  <div class="text-center muted small mt-5 mb-4">Vem ser Jaé 💙</div>
+</section>

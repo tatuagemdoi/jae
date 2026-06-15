@@ -1,0 +1,1228 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Jaé — Protótipo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+/* ==========================================================================
+   JAÉ — Design System / Fundação Visual
+   App mobile prototype (phone frame ~390px)
+   ========================================================================== */
+
+/* ------------------------------ TOKENS ---------------------------------- */
+:root {
+  /* Cores de marca */
+  --blue: #0B5FFF;          /* primário */
+  --blue-700: #0846C4;      /* hover/pressed */
+  --blue-50: #E7EFFF;       /* tint suave */
+  --yellow: #FFD400;        /* destaque / gratuidade */
+  --yellow-700: #C9A700;    /* texto sobre amarelo escuro */
+  --ink: #14171A;           /* texto principal / grafite */
+  --bg: #F4F6FA;            /* fundo do app */
+  --surface: #FFFFFF;       /* superfície / cards */
+  --gray: #6B7280;          /* cinza neutro / secundário */
+  --gray-300: #D1D5DB;      /* bordas */
+  --gray-100: #EEF1F6;      /* divisores / fundos sutis */
+  --green: #16A34A;         /* sucesso */
+  --green-50: #E7F6EC;
+  --red: #DC2626;           /* erro */
+  --red-50: #FDECEC;
+
+  /* Raios */
+  --r-sm: 10px;
+  --r-md: 14px;
+  --r-lg: 18px;             /* cards */
+  --r-xl: 24px;
+  --r-pill: 999px;          /* botões */
+
+  /* Sombras suaves */
+  --shadow-sm: 0 1px 3px rgba(20,23,26,.06), 0 1px 2px rgba(20,23,26,.04);
+  --shadow-md: 0 6px 18px rgba(20,23,26,.08);
+  --shadow-lg: 0 12px 32px rgba(20,23,26,.12);
+  --shadow-blue: 0 10px 24px rgba(11,95,255,.32);
+
+  /* Espaçamento */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 20px;
+  --s-6: 24px;
+  --s-8: 32px;
+
+  /* Tipografia */
+  --font: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* ------------------------------ RESET ----------------------------------- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  font-family: var(--font);
+  color: var(--ink);
+  background: #0d1117;            /* moldura ao redor do phone frame */
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+img { max-width: 100%; display: block; }
+
+/* ------------------------- PHONE FRAME / APP ---------------------------- */
+.app {
+  position: relative;
+  width: 390px;
+  max-width: 100vw;
+  height: 100vh;
+  max-height: 844px;
+  background: var(--bg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-lg);
+  border-radius: 0;
+}
+@media (min-width: 430px) {
+  .app { border-radius: 40px; height: 844px; border: 10px solid #0a0d12; }
+}
+
+/* área rolável onde as telas vivem */
+.app-body {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  position: relative;
+}
+
+/* --------------------------- SCREENS / ROUTER --------------------------- */
+.screen { display: none; padding: 0 var(--s-4) var(--s-8); animation: fade .22s ease; }
+.screen.active { display: block; }
+.screen.no-pad { padding: 0; }
+@keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+/* telas sem bottom-nav podem ocupar tudo */
+.screen.full { min-height: 100%; }
+
+/* --------------------------- APP BAR ------------------------------------ */
+.app-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding: var(--s-5) var(--s-4) var(--s-3);
+  background: transparent;
+}
+.app-bar.solid { background: var(--surface); box-shadow: var(--shadow-sm); }
+.app-bar .title { font-size: 18px; font-weight: 600; }
+.app-bar .spacer { flex: 1; }
+.app-bar .back {
+  width: 40px; height: 40px; border-radius: var(--r-pill);
+  display: grid; place-items: center; font-size: 20px;
+  background: var(--surface); box-shadow: var(--shadow-sm); color: var(--ink);
+}
+.app-bar .icon-btn {
+  width: 40px; height: 40px; border-radius: var(--r-pill);
+  display: grid; place-items: center; font-size: 18px;
+  background: var(--surface); box-shadow: var(--shadow-sm);
+}
+
+/* logo wordmark */
+.logo { font-weight: 700; font-size: 26px; letter-spacing: -.5px; color: var(--blue); }
+.logo.on-blue { color: #fff; }
+.logo.lg { font-size: 40px; }
+
+/* ----------------------------- BOTTOM NAV ------------------------------- */
+.bottom-nav {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  background: var(--surface);
+  padding: var(--s-2) var(--s-2) calc(var(--s-2) + 6px);
+  box-shadow: 0 -2px 16px rgba(20,23,26,.06);
+  position: relative;
+  z-index: 20;
+}
+.nav-item {
+  flex: 1;
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  font-size: 11px; font-weight: 500; color: var(--gray);
+  padding: var(--s-2) 0;
+}
+.nav-item .ico { font-size: 20px; line-height: 1; }
+.nav-item.active { color: var(--blue); }
+.nav-item.active .ico { transform: translateY(-1px); }
+
+/* botão central de pagamento (QR) em destaque circular */
+.nav-pay {
+  flex: 0 0 auto;
+  width: 62px; height: 62px;
+  margin-top: -26px;
+  border-radius: var(--r-pill);
+  background: var(--blue);
+  color: #fff;
+  display: grid; place-items: center;
+  box-shadow: var(--shadow-blue);
+  border: 4px solid var(--surface);
+  font-size: 24px;
+}
+.nav-pay:active { transform: scale(.96); }
+.nav-pay .label { display: none; }
+
+/* ----------------------------- BUTTONS ---------------------------------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--s-2);
+  padding: 13px 22px;
+  border-radius: var(--r-pill);
+  font-size: 15px; font-weight: 600;
+  transition: transform .08s ease, background .15s ease, box-shadow .15s ease;
+  color: var(--ink);
+  background: var(--gray-100);
+}
+.btn:active { transform: scale(.97); }
+.btn-primary { background: var(--blue); color: #fff; box-shadow: var(--shadow-blue); }
+.btn-primary:active { background: var(--blue-700); }
+.btn-yellow { background: var(--yellow); color: var(--ink); }
+.btn-ghost { background: transparent; color: var(--blue); }
+.btn-outline { background: transparent; color: var(--blue); box-shadow: inset 0 0 0 1.5px var(--blue); }
+.btn-danger { background: var(--red-50); color: var(--red); }
+.btn-block { display: flex; width: 100%; }
+.btn-sm { padding: 9px 16px; font-size: 13px; }
+.btn-lg { padding: 16px 24px; font-size: 16px; }
+
+/* ----------------------------- BALANCE CARD ----------------------------- */
+.balance-card {
+  background: linear-gradient(135deg, #0B5FFF 0%, #2E7BFF 55%, #0846C4 100%);
+  color: #fff;
+  border-radius: var(--r-lg);
+  padding: var(--s-5);
+  box-shadow: var(--shadow-blue);
+  position: relative;
+  overflow: hidden;
+}
+.balance-card::after {
+  content: ""; position: absolute; right: -40px; top: -40px;
+  width: 160px; height: 160px; border-radius: 50%;
+  background: rgba(255,255,255,.10);
+}
+.balance-card .label { font-size: 13px; opacity: .85; font-weight: 500; }
+.balance-card .amount { font-size: 34px; font-weight: 700; letter-spacing: -1px; margin-top: 2px; }
+.balance-card .hint { font-size: 12px; opacity: .8; margin-top: 2px; }
+.balance-card .row { display: flex; gap: var(--s-3); margin-top: var(--s-4); position: relative; z-index: 1; }
+
+/* ----------------------------- QUICK ACTIONS ---------------------------- */
+.quick-actions {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s-3);
+  margin: var(--s-5) 0;
+}
+.quick-action {
+  display: flex; flex-direction: column; align-items: center; gap: var(--s-2);
+  font-size: 11.5px; font-weight: 500; color: var(--ink); text-align: center;
+}
+.quick-action .ico {
+  width: 54px; height: 54px; border-radius: var(--r-md);
+  background: var(--surface); box-shadow: var(--shadow-sm);
+  display: grid; place-items: center; font-size: 22px;
+  transition: transform .08s ease;
+}
+.quick-action:active .ico { transform: scale(.94); }
+.quick-action .ico.blue { background: var(--blue-50); }
+.quick-action .ico.yellow { background: #FFF6CC; }
+
+/* ------------------------------- CHIPS ---------------------------------- */
+.chip {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 10px 16px; border-radius: var(--r-pill);
+  background: var(--surface); box-shadow: var(--shadow-sm);
+  font-size: 14px; font-weight: 600; color: var(--ink);
+  transition: all .12s ease;
+}
+.chip.selected { background: var(--blue); color: #fff; box-shadow: var(--shadow-blue); }
+.chip-row { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+.chip.sm { padding: 6px 12px; font-size: 12px; }
+
+/* ------------------------------- CARDS ---------------------------------- */
+.card {
+  background: var(--surface); border-radius: var(--r-lg);
+  padding: var(--s-4); box-shadow: var(--shadow-sm);
+}
+.card + .card { margin-top: var(--s-3); }
+.card-title { font-size: 15px; font-weight: 600; margin-bottom: var(--s-1); }
+.card-sub { font-size: 13px; color: var(--gray); }
+
+/* section header */
+.section-head {
+  display: flex; align-items: center; justify-content: space-between;
+  margin: var(--s-5) 0 var(--s-3);
+}
+.section-head h2 { font-size: 16px; font-weight: 600; }
+.section-head a { font-size: 13px; color: var(--blue); font-weight: 600; }
+
+/* ------------------------------ LISTS ----------------------------------- */
+.list {
+  background: var(--surface); border-radius: var(--r-lg);
+  overflow: hidden; box-shadow: var(--shadow-sm);
+}
+.list-item {
+  display: flex; align-items: center; gap: var(--s-3);
+  padding: var(--s-4); border-bottom: 1px solid var(--gray-100);
+}
+.list-item:last-child { border-bottom: none; }
+.list-item .ico {
+  width: 42px; height: 42px; border-radius: var(--r-pill);
+  display: grid; place-items: center; font-size: 18px;
+  background: var(--blue-50); flex: 0 0 auto;
+}
+.list-item .body { flex: 1; min-width: 0; }
+.list-item .body .t { font-size: 14.5px; font-weight: 600; }
+.list-item .body .s { font-size: 12.5px; color: var(--gray); }
+.list-item .chev { color: var(--gray-300); font-size: 18px; }
+
+/* ------------------------- TRANSACTION ROW ------------------------------ */
+.txn-row {
+  display: flex; align-items: center; gap: var(--s-3);
+  padding: var(--s-3) var(--s-4);
+  border-bottom: 1px solid var(--gray-100);
+  background: var(--surface);
+}
+.txn-row:first-child { border-top-left-radius: var(--r-lg); border-top-right-radius: var(--r-lg); }
+.txn-row:last-child { border-bottom: none; border-bottom-left-radius: var(--r-lg); border-bottom-right-radius: var(--r-lg); }
+.txn-row .ico {
+  width: 40px; height: 40px; border-radius: var(--r-pill);
+  display: grid; place-items: center; font-size: 17px;
+  background: var(--gray-100); flex: 0 0 auto;
+}
+.txn-row .body { flex: 1; min-width: 0; }
+.txn-row .body .t { font-size: 14px; font-weight: 600; }
+.txn-row .body .s { font-size: 12px; color: var(--gray); }
+.txn-row .amt { font-size: 14.5px; font-weight: 700; white-space: nowrap; }
+.txn-row .amt.in { color: var(--green); }
+.txn-row .amt.out { color: var(--ink); }
+
+/* date group label */
+.txn-date { font-size: 12px; font-weight: 600; color: var(--gray); margin: var(--s-4) 0 var(--s-2) 4px; }
+
+/* ------------------------------ QR CARD --------------------------------- */
+.qr-card {
+  background: var(--surface); border-radius: var(--r-xl);
+  padding: var(--s-6); box-shadow: var(--shadow-md);
+  text-align: center;
+}
+.qr-card .qr {
+  width: 200px; height: 200px; margin: 0 auto var(--s-4);
+  border-radius: var(--r-md); background:
+    repeating-conic-gradient(var(--ink) 0% 25%, #fff 0% 50%) 50% / 18px 18px;
+  box-shadow: inset 0 0 0 8px #fff, 0 0 0 1px var(--gray-100);
+}
+.qr-card .title { font-size: 17px; font-weight: 600; }
+.qr-card .sub { font-size: 13px; color: var(--gray); margin-top: 4px; }
+
+/* ------------------------- MODAL / BOTTOM SHEET ------------------------- */
+.modal {
+  position: absolute; inset: 0; z-index: 50;
+  background: rgba(20,23,26,.45);
+  display: none; align-items: flex-end;
+  animation: fade .2s ease;
+}
+.modal.open { display: flex; }
+.sheet {
+  width: 100%; background: var(--surface);
+  border-radius: var(--r-xl) var(--r-xl) 0 0;
+  padding: var(--s-3) var(--s-5) var(--s-6);
+  box-shadow: var(--shadow-lg);
+  animation: slideUp .26s cubic-bezier(.2,.8,.2,1);
+}
+@keyframes slideUp { from { transform: translateY(100%); } to { transform: none; } }
+.sheet .grabber { width: 40px; height: 4px; border-radius: 2px; background: var(--gray-300); margin: 0 auto var(--s-4); }
+.sheet .sheet-title { font-size: 18px; font-weight: 600; margin-bottom: var(--s-2); }
+.sheet .sheet-sub { font-size: 13px; color: var(--gray); margin-bottom: var(--s-4); }
+
+/* centered modal variant */
+.modal.center { align-items: center; justify-content: center; padding: var(--s-5); }
+.modal.center .sheet { border-radius: var(--r-xl); width: 100%; text-align: center; animation: pop .24s ease; }
+@keyframes pop { from { transform: scale(.92); opacity: 0; } to { transform: none; opacity: 1; } }
+
+/* ------------------------------ BADGES ---------------------------------- */
+.badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 10px; border-radius: var(--r-pill);
+  font-size: 11.5px; font-weight: 600;
+  background: var(--gray-100); color: var(--gray);
+}
+.badge.blue { background: var(--blue-50); color: var(--blue); }
+.badge.green { background: var(--green-50); color: var(--green); }
+.badge.yellow { background: #FFF6CC; color: var(--yellow-700); }
+.badge.red { background: var(--red-50); color: var(--red); }
+
+/* ------------------------------ PROGRESS -------------------------------- */
+.progress { height: 10px; border-radius: var(--r-pill); background: var(--gray-100); overflow: hidden; }
+.progress .bar { height: 100%; border-radius: var(--r-pill); background: linear-gradient(90deg, var(--blue), #2E7BFF); }
+.progress.yellow .bar { background: linear-gradient(90deg, var(--yellow), #FFE45C); }
+
+/* ------------------------- CLUBE / REWARDS ------------------------------ */
+.reward-card {
+  background: var(--surface); border-radius: var(--r-lg);
+  padding: var(--s-4); box-shadow: var(--shadow-sm);
+  display: flex; gap: var(--s-3); align-items: center;
+}
+.reward-card .thumb {
+  width: 54px; height: 54px; border-radius: var(--r-md); flex: 0 0 auto;
+  display: grid; place-items: center; font-size: 24px;
+  background: #FFF6CC;
+}
+.reward-card .body { flex: 1; }
+.reward-card .body .t { font-size: 14.5px; font-weight: 600; }
+.reward-card .body .s { font-size: 12.5px; color: var(--gray); }
+.reward-card .cost { font-size: 13px; font-weight: 700; color: var(--yellow-700); white-space: nowrap; }
+
+.mission-row {
+  display: flex; align-items: center; gap: var(--s-3);
+  padding: var(--s-3) var(--s-4);
+  background: var(--surface); border-radius: var(--r-md);
+  box-shadow: var(--shadow-sm); margin-bottom: var(--s-2);
+}
+.mission-row .check {
+  width: 28px; height: 28px; border-radius: var(--r-pill); flex: 0 0 auto;
+  display: grid; place-items: center; font-size: 15px;
+  background: var(--gray-100); color: var(--gray);
+}
+.mission-row.done .check { background: var(--green); color: #fff; }
+.mission-row .body { flex: 1; }
+.mission-row .body .t { font-size: 14px; font-weight: 600; }
+.mission-row .body .s { font-size: 12px; color: var(--gray); }
+.mission-row .pts { font-size: 13px; font-weight: 700; color: var(--blue); }
+
+/* ------------------------------- TOAST ---------------------------------- */
+.toast {
+  position: absolute; left: 50%; bottom: 88px; transform: translateX(-50%) translateY(20px);
+  background: var(--ink); color: #fff;
+  padding: 12px 18px; border-radius: var(--r-pill);
+  font-size: 13.5px; font-weight: 500;
+  box-shadow: var(--shadow-lg);
+  opacity: 0; pointer-events: none; z-index: 80;
+  transition: opacity .25s ease, transform .25s ease;
+  max-width: 88%; text-align: center;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ------------------------------ HELPERS --------------------------------- */
+.text-center { text-align: center; }
+.muted { color: var(--gray); }
+.small { font-size: 12.5px; }
+.bold { font-weight: 700; }
+.mt-2 { margin-top: var(--s-2); }
+.mt-3 { margin-top: var(--s-3); }
+.mt-4 { margin-top: var(--s-4); }
+.mt-5 { margin-top: var(--s-5); }
+.mb-2 { margin-bottom: var(--s-2); }
+.mb-3 { margin-bottom: var(--s-3); }
+.mb-4 { margin-bottom: var(--s-4); }
+.row { display: flex; align-items: center; gap: var(--s-3); }
+.row.between { justify-content: space-between; }
+.col { display: flex; flex-direction: column; }
+.gap-2 { gap: var(--s-2); }
+.gap-3 { gap: var(--s-3); }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-3); }
+.divider { height: 1px; background: var(--gray-100); margin: var(--s-4) 0; }
+
+/* input field */
+.field {
+  width: 100%; padding: 14px 16px; border-radius: var(--r-md);
+  background: var(--surface); box-shadow: inset 0 0 0 1.5px var(--gray-100);
+  font-family: inherit; font-size: 15px; color: var(--ink);
+}
+.field:focus { outline: none; box-shadow: inset 0 0 0 1.5px var(--blue); }
+.field-label { font-size: 13px; font-weight: 600; color: var(--gray); margin-bottom: 6px; display: block; }
+
+/* hero amount input (recarga) */
+.amount-input { text-align: center; font-size: 40px; font-weight: 700; color: var(--ink); border: none; background: transparent; width: 100%; }
+.amount-input:focus { outline: none; }
+
+/* onboarding hero */
+.hero {
+  min-height: 100%; display: flex; flex-direction: column;
+  justify-content: center; align-items: center; text-align: center;
+  padding: var(--s-8) var(--s-6);
+  background: linear-gradient(160deg, #0B5FFF 0%, #0846C4 100%);
+  color: #fff;
+}
+.hero h1 { font-size: 28px; font-weight: 700; margin: var(--s-4) 0 var(--s-2); }
+.hero p { font-size: 15px; opacity: .9; max-width: 280px; }
+.hero .art { font-size: 72px; }
+.hero .actions { margin-top: var(--s-8); width: 100%; display: flex; flex-direction: column; gap: var(--s-3); }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="app-body">
+
+<!-- ===================== TELA: ONBOARDING ===================== -->
+<section class="screen full no-pad active" id="screen-onboarding">
+  <div class="hero">
+    <div class="logo on-blue lg mb-4">Jaé</div>
+    <div class="art">🚌</div>
+    <h1>Vem ser Jaé</h1>
+    <p>Pague sua passagem pelo celular, recarregue na hora e use em todo o transporte do Rio: BRT, VLT, ônibus e vans.</p>
+    <div class="actions">
+      <button class="btn btn-yellow btn-lg btn-block" onclick="navigate('inicio')">Entrar</button>
+      <button class="btn btn-ghost btn-block" onclick="navigate('inicio')">Criar conta</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TELA: INICIO ===================== -->
+<section class="screen" id="screen-inicio">
+  <div class="app-bar">
+    <div class="col" style="gap:2px">
+      <span class="small muted">Bom dia</span>
+      <span class="title bold" style="text-align:left">Olá, Ana 👋</span>
+    </div>
+    <span class="spacer"></span>
+    <button class="icon-btn" onclick="showToast('Você não tem novas notificações')">🔔</button>
+  </div>
+
+  <div class="balance-card">
+    <div class="label">Saldo disponível</div>
+    <div class="amount">R$ 47,50</div>
+    <div class="hint">Seu saldo não expira ✨</div>
+    <div class="row mt-3">
+      <button class="btn btn-yellow btn-sm" onclick="navigate('recarregar')">⚡ Recarregar</button>
+      <button class="btn btn-ghost btn-sm" onclick="navigate('pagar')">Pagar</button>
+    </div>
+  </div>
+
+  <div class="quick-actions mt-4">
+    <div class="quick-action" onclick="navigate('recarregar')">
+      <span class="ico blue">⚡</span>
+      <span>Recarregar</span>
+    </div>
+    <div class="quick-action" onclick="navigate('pagar')">
+      <span class="ico blue">📲</span>
+      <span>Pagar</span>
+    </div>
+    <div class="quick-action" onclick="navigate('cartoes')">
+      <span class="ico yellow">💳</span>
+      <span>Cartões</span>
+    </div>
+    <div class="quick-action" onclick="navigate('extrato')">
+      <span class="ico blue">📄</span>
+      <span>Extrato</span>
+    </div>
+  </div>
+
+  <div class="section-head mt-5">
+    <h2>Última viagem</h2>
+    <a onclick="navigate('extrato')">ver todos</a>
+  </div>
+  <div class="txn-date">Hoje, 14 de junho</div>
+  <div class="txn-row">
+    <span class="ico">🚌</span>
+    <div class="body">
+      <div class="t">BRT • Transoeste</div>
+      <div class="s">Hoje às 08:12 · Tarifa única</div>
+    </div>
+    <div class="amt out">−R$ 4,30</div>
+  </div>
+
+  <div class="card mt-5" onclick="navigate('clube')" style="background:linear-gradient(135deg,var(--blue),var(--blue-700));color:#fff;cursor:pointer">
+    <div class="row between">
+      <div class="col" style="gap:4px">
+        <div class="card-title" style="color:#fff">Clube Jaé ⭐</div>
+        <div class="card-sub" style="color:rgba(255,255,255,.85)">Você tem 1.250 pontos · troque por recargas</div>
+      </div>
+      <span class="chev" style="color:#fff">›</span>
+    </div>
+  </div>
+
+  <div class="text-center muted small mt-5 mb-4">Vem ser Jaé 💙</div>
+</section>
+
+<!-- ===================== TELA: PAGAR ===================== -->
+<section class="screen" id="screen-pagar">
+  <header class="app-bar solid">
+    <button class="back" onclick="navigate('inicio')">‹</button>
+    <span class="title">Pagar</span>
+    <span class="spacer"></span>
+    <button class="icon-btn" onclick="showToast('Tá precisando de ajuda?')">?</button>
+  </header>
+
+  <div class="chip-row mb-3">
+    <span class="chip selected" onclick="selectChip(this)">🚌 Ônibus</span>
+    <span class="chip" onclick="selectChip(this)">🚍 BRT</span>
+    <span class="chip" onclick="selectChip(this)">🚊 VLT</span>
+    <span class="chip" onclick="selectChip(this)">🚐 Van</span>
+  </div>
+
+  <div class="qr-card">
+    <div class="qr">
+      <svg viewBox="0 0 200 200" width="200" height="200" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
+        <rect width="200" height="200" fill="#fff"/>
+        <g fill="#14171A">
+          <rect x="10" y="10" width="50" height="50"/>
+          <rect x="20" y="20" width="30" height="30" fill="#fff"/>
+          <rect x="28" y="28" width="14" height="14"/>
+          <rect x="140" y="10" width="50" height="50"/>
+          <rect x="150" y="20" width="30" height="30" fill="#fff"/>
+          <rect x="158" y="28" width="14" height="14"/>
+          <rect x="10" y="140" width="50" height="50"/>
+          <rect x="20" y="150" width="30" height="30" fill="#fff"/>
+          <rect x="28" y="158" width="14" height="14"/>
+          <rect x="72" y="10" width="10" height="10"/>
+          <rect x="92" y="10" width="10" height="10"/>
+          <rect x="112" y="20" width="10" height="10"/>
+          <rect x="82" y="30" width="10" height="10"/>
+          <rect x="102" y="40" width="10" height="10"/>
+          <rect x="72" y="50" width="10" height="10"/>
+          <rect x="122" y="50" width="10" height="10"/>
+          <rect x="10" y="72" width="10" height="10"/>
+          <rect x="30" y="72" width="10" height="10"/>
+          <rect x="50" y="82" width="10" height="10"/>
+          <rect x="70" y="72" width="10" height="10"/>
+          <rect x="90" y="82" width="10" height="10"/>
+          <rect x="110" y="72" width="10" height="10"/>
+          <rect x="130" y="82" width="10" height="10"/>
+          <rect x="150" y="72" width="10" height="10"/>
+          <rect x="170" y="82" width="10" height="10"/>
+          <rect x="20" y="102" width="10" height="10"/>
+          <rect x="40" y="112" width="10" height="10"/>
+          <rect x="62" y="102" width="10" height="10"/>
+          <rect x="82" y="112" width="10" height="10"/>
+          <rect x="102" y="102" width="10" height="10"/>
+          <rect x="122" y="112" width="10" height="10"/>
+          <rect x="142" y="102" width="10" height="10"/>
+          <rect x="162" y="112" width="10" height="10"/>
+          <rect x="72" y="130" width="10" height="10"/>
+          <rect x="92" y="140" width="10" height="10"/>
+          <rect x="112" y="150" width="10" height="10"/>
+          <rect x="132" y="140" width="10" height="10"/>
+          <rect x="152" y="150" width="10" height="10"/>
+          <rect x="172" y="140" width="10" height="10"/>
+          <rect x="82" y="160" width="10" height="10"/>
+          <rect x="102" y="170" width="10" height="10"/>
+          <rect x="122" y="172" width="10" height="10"/>
+          <rect x="142" y="172" width="10" height="10"/>
+          <rect x="162" y="162" width="10" height="10"/>
+        </g>
+      </svg>
+    </div>
+    <div class="title">Aproxime do validador</div>
+    <div class="sub">Toque o celular no leitor para validar sua passagem</div>
+  </div>
+
+  <div class="card text-center mt-4">
+    <div class="card-sub">Tarifa atual · Ônibus (SPPO)</div>
+    <div class="amount bold" style="font-size:32px">R$ 4,30</div>
+    <div class="small muted">Saldo disponível: R$ 38,60</div>
+  </div>
+
+  <div class="row gap-2 mt-4">
+    <button class="btn btn-yellow btn-block" onclick="navigate('recarregar')">Recarregar saldo</button>
+  </div>
+
+  <button class="btn btn-ghost btn-block mt-3" onclick="navigate('cartoes')">Usar cartão físico</button>
+
+  <p class="small muted text-center mt-4 mb-4">Seu saldo Jaé não expira. Vem ser Jaé! 💛</p>
+
+  <div class="modal" id="confirm-pagar">
+    <div class="sheet">
+      <div class="grabber"></div>
+      <div class="sheet-title">Confirmar pagamento</div>
+      <div class="sheet-sub">Tarifa de ônibus no valor de R$ 4,30</div>
+      <button class="btn btn-primary btn-block mt-3" onclick="closeSheet('confirm-pagar'); showToast('Passagem validada! Boa viagem 🚌')">Confirmar</button>
+      <button class="btn btn-outline btn-block mt-2" onclick="closeSheet('confirm-pagar')">Cancelar</button>
+    </div>
+  </div>
+
+  <nav class="bottom-nav">
+    <a class="nav-item" data-nav="inicio" onclick="navigate('inicio')"><span class="ico">🏠</span><span>Início</span></a>
+    <a class="nav-item" data-nav="extrato" onclick="navigate('extrato')"><span class="ico">📃</span><span>Extrato</span></a>
+    <a class="nav-pay active" onclick="navigate('pagar')">⊞</a>
+    <a class="nav-item" data-nav="cartoes" onclick="navigate('cartoes')"><span class="ico">💳</span><span>Cartões</span></a>
+    <a class="nav-item" data-nav="clube" onclick="navigate('clube')"><span class="ico">🎁</span><span>Clube</span></a>
+  </nav>
+</section>
+
+<!-- ===================== TELA: RECARREGAR ===================== -->
+<section class="screen" id="screen-recarregar">
+  <div class="app-bar solid">
+    <button class="back" onclick="navigate('inicio')" aria-label="Voltar">‹</button>
+    <span class="title">Recarregar</span>
+    <span class="spacer"></span>
+  </div>
+
+  <div class="balance-card mb-4">
+    <span class="label">Saldo atual</span>
+    <span class="amount">R$ 12,90</span>
+    <span class="hint">Seu saldo não expira. Recarregue na hora 😉</span>
+  </div>
+
+  <div class="section-head">
+    <h2>Quanto você quer recarregar?</h2>
+  </div>
+  <div class="chip-row mb-4">
+    <span class="chip" onclick="selectChip(this)">R$ 10</span>
+    <span class="chip selected" onclick="selectChip(this)">R$ 20</span>
+    <span class="chip" onclick="selectChip(this)">R$ 50</span>
+    <span class="chip" onclick="selectChip(this)">R$ 100</span>
+    <span class="chip" onclick="selectChip(this)">Outro</span>
+  </div>
+
+  <div class="section-head">
+    <h2>Forma de pagamento</h2>
+  </div>
+  <div class="list mb-4">
+    <div class="list-item">
+      <span class="ico blue">⚡</span>
+      <div class="body">
+        <div class="t">Pix</div>
+        <div class="s">Cai na hora, sem taxa</div>
+      </div>
+      <span class="badge green">Selecionado</span>
+    </div>
+    <div class="divider"></div>
+    <div class="list-item">
+      <span class="ico">💳</span>
+      <div class="body">
+        <div class="t">Cartão de crédito</div>
+        <div class="s">Visa •••• 4821</div>
+      </div>
+      <span class="chev">›</span>
+    </div>
+    <div class="divider"></div>
+    <div class="list-item">
+      <span class="ico">🧾</span>
+      <div class="body">
+        <div class="t">Boleto</div>
+        <div class="s">Compensa em até 2 dias úteis</div>
+      </div>
+      <span class="chev">›</span>
+    </div>
+  </div>
+
+  <div class="card mb-4">
+    <div class="row between">
+      <span class="muted">Valor da recarga</span>
+      <span class="bold">R$ 20,00</span>
+    </div>
+    <div class="divider"></div>
+    <div class="row between">
+      <span class="muted">Taxa</span>
+      <span class="bold">R$ 0,00</span>
+    </div>
+    <div class="divider"></div>
+    <div class="row between">
+      <span class="bold">Total</span>
+      <span class="bold">R$ 20,00</span>
+    </div>
+  </div>
+
+  <button class="btn btn-primary btn-block btn-lg" onclick="navigate('inicio'); showToast('Recarga realizada!')">Confirmar recarga</button>
+  <p class="small muted text-center mt-2">Tá precisando de ajuda? Fale com a gente.</p>
+
+  <nav class="bottom-nav">
+    <div class="nav-item" data-nav="inicio" onclick="navigate('inicio')">
+      <span class="ico">🏠</span><span>Início</span>
+    </div>
+    <div class="nav-item" data-nav="extrato" onclick="navigate('extrato')">
+      <span class="ico">📄</span><span>Extrato</span>
+    </div>
+    <div class="nav-pay" onclick="navigate('pagar')">⬛</div>
+    <div class="nav-item" data-nav="cartao" onclick="navigate('cartoes')">
+      <span class="ico">💳</span><span>Cartão</span>
+    </div>
+    <div class="nav-item" data-nav="clube" onclick="navigate('clube')">
+      <span class="ico">⭐</span><span>Clube</span>
+    </div>
+  </nav>
+</section>
+
+<!-- ===================== TELA: EXTRATO ===================== -->
+<section class="screen" id="screen-extrato">
+  <div class="app-bar solid">
+    <button class="back" onclick="navigate('inicio')">‹</button>
+    <div class="title">Extrato</div>
+    <div class="spacer"></div>
+    <button class="icon-btn" onclick="openSheet('filtro-extrato')">⛃</button>
+  </div>
+
+  <div class="card row between mb-3">
+    <div>
+      <div class="card-sub">Saldo disponível</div>
+      <div class="card-title">R$ 50,90</div>
+    </div>
+    <span class="badge green">Não expira</span>
+  </div>
+
+  <div class="txn-date">Hoje, 14 de junho</div>
+  <div class="list mb-4">
+    <div class="txn-row">
+      <span class="ico blue">🚍</span>
+      <div class="body">
+        <div class="t">BRT — Estação Alvorada</div>
+        <div class="s">14:32 · Pago por QR Code</div>
+      </div>
+      <div class="amt out">−R$ 4,30</div>
+    </div>
+    <div class="txn-row">
+      <span class="ico blue">🚊</span>
+      <div class="body">
+        <div class="t">VLT — Carioca</div>
+        <div class="s">11:07 · Pago por QR Code</div>
+      </div>
+      <div class="amt out">−R$ 4,30</div>
+    </div>
+    <div class="txn-row">
+      <span class="ico green">💰</span>
+      <div class="body">
+        <div class="t">Recarga via PIX</div>
+        <div class="s">08:45 · Disponível na hora</div>
+      </div>
+      <div class="amt in">+R$ 50,00</div>
+    </div>
+  </div>
+
+  <div class="txn-date">Ontem, 13 de junho</div>
+  <div class="list mb-4">
+    <div class="txn-row">
+      <span class="ico blue">🚌</span>
+      <div class="body">
+        <div class="t">Ônibus — Linha 309 (SPPO)</div>
+        <div class="s">18:50 · Pago por QR Code</div>
+      </div>
+      <div class="amt out">−R$ 4,30</div>
+    </div>
+    <div class="txn-row">
+      <span class="ico blue">🚍</span>
+      <div class="body">
+        <div class="t">BRT — Estação Madureira</div>
+        <div class="s">07:58 · Pago por QR Code</div>
+      </div>
+      <div class="amt out">−R$ 4,30</div>
+    </div>
+  </div>
+
+  <div class="modal" id="filtro-extrato">
+    <div class="sheet">
+      <div class="grabber"></div>
+      <div class="sheet-title">Filtrar extrato</div>
+      <div class="sheet-sub">Escolha o período que deseja visualizar.</div>
+      <div class="chip-row mt-3">
+        <span class="chip selected" onclick="selectChip(this)">Tudo</span>
+        <span class="chip" onclick="selectChip(this)">Viagens</span>
+        <span class="chip" onclick="selectChip(this)">Recargas</span>
+        <span class="chip" onclick="selectChip(this)">Últimos 7 dias</span>
+        <span class="chip" onclick="selectChip(this)">Últimos 30 dias</span>
+      </div>
+      <button class="btn btn-primary btn-block btn-lg mt-4" onclick="closeSheet('filtro-extrato')">Aplicar filtro</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TELA: CARTOES ===================== -->
+<section class="screen" id="screen-cartoes">
+  <div class="app-bar solid">
+    <button class="back" onclick="navigate('inicio')">‹</button>
+    <div class="title">Meus cartões</div>
+    <div class="spacer"></div>
+    <button class="icon-btn" onclick="showToast('Tá precisando de ajuda?')">?</button>
+  </div>
+
+  <div class="section-head">
+    <h2>Cartão principal</h2>
+    <a onclick="navigate('extrato')">Ver extrato</a>
+  </div>
+
+  <div class="balance-card">
+    <div class="row between">
+      <span class="label">Jaé Virtual</span>
+      <span class="badge green">Ativo</span>
+    </div>
+    <div class="amount">R$ 42,80</div>
+    <div class="hint">•••• 7204 · Saldo não expira</div>
+    <div class="row gap-2 mt-3">
+      <button class="btn btn-ghost btn-sm" onclick="showToast('Cartão bloqueado')">🔒 Bloquear</button>
+      <button class="btn btn-ghost btn-sm" onclick="showToast('2ª via solicitada')">📄 2ª via</button>
+    </div>
+  </div>
+
+  <div class="section-head mt-4">
+    <h2>Cartão infantil</h2>
+    <a onclick="navigate('extrato')">Ver extrato</a>
+  </div>
+
+  <div class="card">
+    <div class="row between">
+      <div class="row gap-3">
+        <span class="ico yellow">🧒</span>
+        <div class="body">
+          <div class="card-title">Jaézinho</div>
+          <div class="card-sub">•••• 1138 · Sofia Pires</div>
+        </div>
+      </div>
+      <span class="badge yellow">Infantil</span>
+    </div>
+    <div class="divider"></div>
+    <div class="row between">
+      <div>
+        <div class="small muted">Saldo</div>
+        <div class="bold">R$ 15,00</div>
+      </div>
+      <div class="row gap-2">
+        <button class="btn btn-ghost btn-sm" onclick="showToast('Cartão bloqueado')">🔒 Bloquear</button>
+        <button class="btn btn-ghost btn-sm" onclick="showToast('2ª via solicitada')">📄 2ª via</button>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn btn-primary btn-block btn-lg mt-4" onclick="showToast('Vamos adicionar um cartão')">➕ Adicionar cartão</button>
+  <p class="text-center muted small mt-2 mb-4">Solicite o Jaé físico, virtual ou o Jaézinho.</p>
+</section>
+
+<!-- ===================== TELA: CLUBE ===================== -->
+<section class="screen" id="screen-clube">
+  <div class="app-bar solid">
+    <button class="back" onclick="navigate('inicio')">‹</button>
+    <span class="title">Clube Jaé</span>
+    <span class="spacer"></span>
+    <button class="icon-btn" onclick="showToast('Tá precisando de ajuda?')">?</button>
+  </div>
+
+  <!-- Header pontos + nível -->
+  <div class="card mt-2">
+    <div class="row between">
+      <div>
+        <div class="card-sub">Seus pontos</div>
+        <div class="row gap-2" style="align-items:baseline">
+          <span class="amount" style="font-size:30px">1.250</span>
+          <span class="muted small">pts</span>
+        </div>
+      </div>
+      <span class="badge yellow">Nível Prata</span>
+    </div>
+
+    <div class="mt-3">
+      <div class="row between small muted mb-2">
+        <span class="bold" style="color:var(--ink)">Prata</span>
+        <span>Faltam 250 pts para o Ouro</span>
+      </div>
+      <div class="progress yellow"><div class="bar" style="width:71%"></div></div>
+    </div>
+  </div>
+
+  <!-- Missões -->
+  <div class="section-head mt-4">
+    <h2>Missões</h2>
+    <a onclick="showToast('Em breve: mais missões!')">ver todas</a>
+  </div>
+  <p class="small muted mb-3">Complete missões e ganhe pontos toda semana.</p>
+
+  <div class="list">
+    <div class="mission-row">
+      <span class="check">○</span>
+      <div class="body">
+        <div class="t">Faça 5 viagens esta semana</div>
+        <div class="s">3 de 5 viagens · termina domingo</div>
+      </div>
+      <span class="pts">+50</span>
+    </div>
+    <div class="mission-row">
+      <span class="check">○</span>
+      <div class="body">
+        <div class="t">Recarregue via PIX</div>
+        <div class="s">Recarregue qualquer valor pelo PIX</div>
+      </div>
+      <span class="pts">+30</span>
+    </div>
+    <div class="mission-row done">
+      <span class="check">✓</span>
+      <div class="body">
+        <div class="t">Pague uma tarifa por QR Code</div>
+        <div class="s">Concluída · pontos creditados</div>
+      </div>
+      <span class="pts">+20</span>
+    </div>
+    <div class="mission-row">
+      <span class="check">○</span>
+      <div class="body">
+        <div class="t">Use 2 modais diferentes</div>
+        <div class="s">BRT, VLT, ônibus, vans ou cabritinhos · 1 de 2</div>
+      </div>
+      <span class="pts">+40</span>
+    </div>
+  </div>
+
+  <!-- Recompensas -->
+  <div class="section-head mt-4">
+    <h2>Recompensas</h2>
+    <a onclick="showToast('Catálogo completo em breve!')">ver todas</a>
+  </div>
+  <p class="small muted mb-3">Troque seus pontos por bônus e descontos.</p>
+
+  <div class="reward-card">
+    <span class="thumb">💰</span>
+    <div class="body">
+      <div class="t">R$ 5 de bônus no saldo</div>
+      <div class="s">Crédito que não expira, na hora</div>
+    </div>
+    <span class="cost">500 pts</span>
+  </div>
+
+  <div class="reward-card">
+    <span class="thumb">🎟️</span>
+    <div class="body">
+      <div class="t">R$ 10 de bônus no saldo</div>
+      <div class="s">Mais viagens pelo Rio</div>
+    </div>
+    <span class="cost">950 pts</span>
+  </div>
+
+  <div class="reward-card">
+    <span class="thumb">🏷️</span>
+    <div class="body">
+      <div class="t">Desconto parceiro</div>
+      <div class="s">15% em lojas e cafés parceiros</div>
+    </div>
+    <span class="cost">400 pts</span>
+  </div>
+
+  <div class="reward-card">
+    <span class="thumb">🎬</span>
+    <div class="body">
+      <div class="t">Cupom de cinema</div>
+      <div class="s">Ingresso com desconto na rede parceira</div>
+    </div>
+    <span class="cost">700 pts</span>
+  </div>
+
+  <button class="btn btn-yellow btn-block btn-lg mt-3 mb-4" onclick="showToast('Resgate disponível em breve!')">Resgatar recompensa</button>
+
+  <div class="bottom-nav">
+    <a class="nav-item" data-nav="inicio" onclick="navigate('inicio')">
+      <span class="ico">🏠</span><span>Início</span>
+    </a>
+    <a class="nav-item" data-nav="extrato" onclick="navigate('extrato')">
+      <span class="ico">📄</span><span>Extrato</span>
+    </a>
+    <button class="nav-pay" onclick="navigate('pagar')"><span class="ico">⬛</span><span class="label">Pagar</span></button>
+    <a class="nav-item" data-nav="cartao" onclick="navigate('cartoes')">
+      <span class="ico">💳</span><span>Cartão</span>
+    </a>
+    <a class="nav-item active" data-nav="clube" onclick="navigate('clube')">
+      <span class="ico">⭐</span><span>Clube</span>
+    </a>
+  </div>
+</section>
+
+<!-- ===================== TELA: PERFIL ===================== -->
+<section class="screen" id="screen-perfil">
+  <div class="app-bar solid">
+    <button class="back" onclick="navigate('inicio')">‹</button>
+    <span class="title">Perfil</span>
+    <span class="spacer"></span>
+    <button class="icon-btn" onclick="showToast('🔜 Em breve neste protótipo')">⚙️</button>
+  </div>
+
+  <div class="card row gap-3" style="align-items:center">
+    <span class="ico blue" style="font-size:28px;width:56px;height:56px;border-radius:var(--r-pill);display:flex;align-items:center;justify-content:center">👩🏽</span>
+    <div class="body" style="flex:1;min-width:0">
+      <div class="t bold" style="font-size:17px">Ana Souza</div>
+      <div class="s muted small">ana.souza@email.com</div>
+    </div>
+    <span class="badge green">Verificada</span>
+  </div>
+
+  <div class="section-head mt-4">
+    <h2>Conta</h2>
+  </div>
+  <div class="list">
+    <div class="list-item" onclick="showToast('🔜 Em breve neste protótipo')">
+      <span class="ico blue">👤</span>
+      <div class="body">
+        <div class="t">Dados pessoais</div>
+        <div class="s">Nome, CPF, telefone</div>
+      </div>
+      <span class="chev">›</span>
+    </div>
+    <div class="list-item" onclick="showToast('🔜 Em breve neste protótipo')">
+      <span class="ico yellow">🎓</span>
+      <div class="body">
+        <div class="t">Gratuidades</div>
+        <div class="s">Benefício de transporte</div>
+      </div>
+      <span class="badge yellow">Estudante</span>
+      <span class="chev">›</span>
+    </div>
+    <div class="list-item" onclick="showToast('🔜 Em breve neste protótipo')">
+      <span class="ico blue">💳</span>
+      <div class="body">
+        <div class="t">Formas de pagamento</div>
+        <div class="s">PIX, cartão de crédito e boleto</div>
+      </div>
+      <span class="chev">›</span>
+    </div>
+  </div>
+
+  <div class="section-head mt-4">
+    <h2>Suporte</h2>
+  </div>
+  <div class="list">
+    <div class="list-item" onclick="showToast('🔜 Em breve neste protótipo')">
+      <span class="ico yellow">💬</span>
+      <div class="body">
+        <div class="t">Tá precisando de ajuda?</div>
+        <div class="s">Central de ajuda e suporte</div>
+      </div>
+      <span class="chev">›</span>
+    </div>
+    <div class="list-item" onclick="showToast('🔜 Em breve neste protótipo')">
+      <span class="ico blue">⚙️</span>
+      <div class="body">
+        <div class="t">Configurações</div>
+        <div class="s">Notificações, segurança e privacidade</div>
+      </div>
+      <span class="chev">›</span>
+    </div>
+  </div>
+
+  <div class="mt-4 mb-4">
+    <button class="btn btn-danger btn-block" onclick="openSheet('sair')">Sair da conta</button>
+  </div>
+
+  <p class="text-center muted small mb-4">Jaé • versão 2.4.1</p>
+
+  <div class="modal center" id="sair">
+    <div class="sheet">
+      <div class="grabber"></div>
+      <div class="sheet-title">Sair da conta?</div>
+      <div class="sheet-sub">Você precisará entrar novamente para usar o app e pagar suas tarifas.</div>
+      <div class="col gap-2 mt-3">
+        <button class="btn btn-danger btn-block" onclick="closeSheet('sair'); navigate('onboarding'); showToast('Você saiu da conta');">Sim, sair</button>
+        <button class="btn btn-ghost btn-block" onclick="closeSheet('sair')">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+    </div><!-- /.app-body -->
+  </div><!-- /.app -->
+
+  <script>
+/* ==========================================================================
+   JAÉ — Router minimalista + helpers de protótipo
+   ========================================================================== */
+
+/**
+ * navigate(id)
+ * Troca a tela ativa: remove .active de todas as .screen e ativa #screen-<id>.
+ * Atualiza o estado .active da bottom-nav (casa o data-nav do item com o id),
+ * e dá scroll ao topo da área rolável.
+ * @param {string} id  sufixo do id da tela, ex: "home" => #screen-home
+ */
+function navigate(id) {
+  // 1) troca de tela
+  var screens = document.querySelectorAll('.screen');
+  for (var i = 0; i < screens.length; i++) {
+    screens[i].classList.remove('active');
+  }
+  var target = document.getElementById('screen-' + id);
+  if (target) target.classList.add('active');
+
+  // 2) atualiza bottom-nav (item com data-nav igual ao id fica .active)
+  var navItems = document.querySelectorAll('.nav-item');
+  for (var j = 0; j < navItems.length; j++) {
+    var navId = navItems[j].getAttribute('data-nav');
+    if (navId && navId === id) {
+      navItems[j].classList.add('active');
+    } else {
+      navItems[j].classList.remove('active');
+    }
+  }
+
+  // 3) scroll ao topo
+  var body = document.querySelector('.app-body');
+  if (body) body.scrollTop = 0;
+  window.scrollTo(0, 0);
+}
+
+/**
+ * showToast(msg)
+ * Exibe uma mensagem temporária (toast) por ~2.2s.
+ * Cria/reusa um único elemento .toast dentro do .app.
+ * @param {string} msg  texto a exibir
+ */
+var _toastTimer = null;
+function showToast(msg) {
+  var app = document.querySelector('.app') || document.body;
+  var toast = document.getElementById('app-toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'app-toast';
+    toast.className = 'toast';
+    app.appendChild(toast);
+  }
+  toast.textContent = msg;
+  // força reflow para reanimar
+  void toast.offsetWidth;
+  toast.classList.add('show');
+
+  if (_toastTimer) clearTimeout(_toastTimer);
+  _toastTimer = setTimeout(function () {
+    toast.classList.remove('show');
+  }, 2200);
+}
+
+/* --------------------------- Bottom sheets ------------------------------- */
+/**
+ * openSheet(id) / closeSheet(id)
+ * Abre/fecha um .modal pelo id (adiciona/remove .open).
+ */
+function openSheet(id) {
+  var m = document.getElementById(id);
+  if (m) m.classList.add('open');
+}
+function closeSheet(id) {
+  var m = document.getElementById(id);
+  if (m) m.classList.remove('open');
+}
+
+/* ------------------------------ Chips ------------------------------------ */
+/**
+ * selectChip(el)
+ * Marca o chip clicado como .selected dentro do mesmo .chip-row,
+ * removendo a seleção dos irmãos.
+ */
+function selectChip(el) {
+  var row = el.closest('.chip-row');
+  if (row) {
+    var chips = row.querySelectorAll('.chip');
+    for (var i = 0; i < chips.length; i++) chips[i].classList.remove('selected');
+  }
+  el.classList.add('selected');
+}
+
+/* ------------------------------ Init ------------------------------------- */
+// Fecha modal ao clicar no backdrop (fora do .sheet)
+document.addEventListener('click', function (e) {
+  if (e.target.classList && e.target.classList.contains('modal')) {
+    e.target.classList.remove('open');
+  }
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+  navigate('onboarding');
+});
+  </script>
+</body>
+</html>

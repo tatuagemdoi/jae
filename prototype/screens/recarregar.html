@@ -1,0 +1,92 @@
+<section class="screen" id="screen-recarregar">
+  <div class="app-bar solid">
+    <button class="back" onclick="navigate('inicio')" aria-label="Voltar">‹</button>
+    <span class="title">Recarregar</span>
+    <span class="spacer"></span>
+  </div>
+
+  <div class="balance-card mb-4">
+    <span class="label">Saldo atual</span>
+    <span class="amount">R$ 12,90</span>
+    <span class="hint">Seu saldo não expira. Recarregue na hora 😉</span>
+  </div>
+
+  <div class="section-head">
+    <h2>Quanto você quer recarregar?</h2>
+  </div>
+  <div class="chip-row mb-4">
+    <span class="chip" onclick="selectChip(this)">R$ 10</span>
+    <span class="chip selected" onclick="selectChip(this)">R$ 20</span>
+    <span class="chip" onclick="selectChip(this)">R$ 50</span>
+    <span class="chip" onclick="selectChip(this)">R$ 100</span>
+    <span class="chip" onclick="selectChip(this)">Outro</span>
+  </div>
+
+  <div class="section-head">
+    <h2>Forma de pagamento</h2>
+  </div>
+  <div class="list mb-4">
+    <div class="list-item">
+      <span class="ico blue">⚡</span>
+      <div class="body">
+        <div class="t">Pix</div>
+        <div class="s">Cai na hora, sem taxa</div>
+      </div>
+      <span class="badge green">Selecionado</span>
+    </div>
+    <div class="divider"></div>
+    <div class="list-item">
+      <span class="ico">💳</span>
+      <div class="body">
+        <div class="t">Cartão de crédito</div>
+        <div class="s">Visa •••• 4821</div>
+      </div>
+      <span class="chev">›</span>
+    </div>
+    <div class="divider"></div>
+    <div class="list-item">
+      <span class="ico">🧾</span>
+      <div class="body">
+        <div class="t">Boleto</div>
+        <div class="s">Compensa em até 2 dias úteis</div>
+      </div>
+      <span class="chev">›</span>
+    </div>
+  </div>
+
+  <div class="card mb-4">
+    <div class="row between">
+      <span class="muted">Valor da recarga</span>
+      <span class="bold">R$ 20,00</span>
+    </div>
+    <div class="divider"></div>
+    <div class="row between">
+      <span class="muted">Taxa</span>
+      <span class="bold">R$ 0,00</span>
+    </div>
+    <div class="divider"></div>
+    <div class="row between">
+      <span class="bold">Total</span>
+      <span class="bold">R$ 20,00</span>
+    </div>
+  </div>
+
+  <button class="btn btn-primary btn-block btn-lg" onclick="navigate('inicio'); showToast('Recarga realizada!')">Confirmar recarga</button>
+  <p class="small muted text-center mt-2">Tá precisando de ajuda? Fale com a gente.</p>
+
+  <nav class="bottom-nav">
+    <div class="nav-item" data-nav="inicio" onclick="navigate('inicio')">
+      <span class="ico">🏠</span><span>Início</span>
+    </div>
+    <div class="nav-item" data-nav="extrato" onclick="navigate('extrato')">
+      <span class="ico">📄</span><span>Extrato</span>
+    </div>
+    <div class="nav-pay" onclick="navigate('pay')">⬛</div>
+    <div class="nav-item" data-nav="cartao" onclick="navigate('cartao')">
+      <span class="ico">💳</span><span>Cartão</span>
+    </div>
+    <div class="nav-item" data-nav="clube" onclick="navigate('clube')">
+      <span class="ico">⭐</span><span>Clube</span>
+    </div>
+  </nav>
+</section>
