@@ -44,3 +44,36 @@ nomes em `fontFamily` do `theme.ts` — RN não traz essas fontes por padrão.
 
 > A cópia espelhada do site jae.com.br é mantida apenas localmente, fora do
 > versionamento (ver `.gitignore` e `NOTICE.md`).
+
+---
+
+## Unificação com o `prototype/`
+
+O repositório tinha **dois** sistemas visuais conflitantes: o `prototype/` (HTML)
+era **azul** (`#0B5FFF`), enquanto a identidade real da Jaé é **verde**
+(`#65BC7B`, confirmado no CSS de jae.com.br). Decisão: **verde oficial** como
+fonte única da verdade.
+
+**Fonte única da verdade:** `design-tokens/` (cores, tipografia, raios, sombras).
+Todo o resto (RN e protótipo) deve refletir esses valores.
+
+O `prototype/` foi **realinhado** ao verde oficial:
+- `--blue*` → `--primary*` (verde `#65BC7B` / hover `#4A9A5E` / tint `#EAF6ED`)
+- amarelo `#FFD400` → `#FFC107`; tinta `#14171A` → `#232323`
+- `--shadow-blue` → `--shadow-brand` (glow verde)
+- fonte **Poppins** → **Montserrat** + **Comfortaa** (display)
+- `--green` permanece como cor de **sucesso** (distinta da marca)
+
+### Mapa: telas do protótipo ↔ componentes RN
+| `prototype/screens/` | Tela RN (`app/`) | Componentes |
+|---|---|---|
+| `inicio.html` | `HomeScreen` ✅ | Card, Pill, Button, Input, TabBar |
+| `cartoes.html` | `CardScreen` ✅ | Card, Pill, Button |
+| `perfil.html` | `ProfileScreen` ✅ | Card, ListItem, Pill |
+| `recarregar.html` | (parcial no Home) | Card, Input, Button |
+| `onboarding.html` | *(a fazer)* | Button |
+| `pagar.html` | *(a fazer)* | Card, Button |
+| `extrato.html` | *(a fazer)* | Card, ListItem |
+| `clube.html` | *(a fazer)* | Card, Pill, Button |
+
+`LoginScreen` (RN) não tem equivalente no protótipo — é tela nova.

@@ -6,7 +6,7 @@
   <title>Jaé — Protótipo</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
 /* ==========================================================================
    JAÉ — Design System / Fundação Visual
@@ -16,12 +16,12 @@
 /* ------------------------------ TOKENS ---------------------------------- */
 :root {
   /* Cores de marca */
-  --blue: #0B5FFF;          /* primário */
-  --blue-700: #0846C4;      /* hover/pressed */
-  --blue-50: #E7EFFF;       /* tint suave */
-  --yellow: #FFD400;        /* destaque / gratuidade */
-  --yellow-700: #C9A700;    /* texto sobre amarelo escuro */
-  --ink: #14171A;           /* texto principal / grafite */
+  --primary: #65BC7B;          /* primário */
+  --primary-700: #4A9A5E;      /* hover/pressed */
+  --primary-50: #EAF6ED;       /* tint suave */
+  --yellow: #FFC107;        /* destaque / gratuidade */
+  --yellow-700: #9A7700;    /* texto sobre amarelo escuro */
+  --ink: #232323;           /* texto principal / grafite */
   --bg: #F4F6FA;            /* fundo do app */
   --surface: #FFFFFF;       /* superfície / cards */
   --gray: #6B7280;          /* cinza neutro / secundário */
@@ -43,7 +43,7 @@
   --shadow-sm: 0 1px 3px rgba(20,23,26,.06), 0 1px 2px rgba(20,23,26,.04);
   --shadow-md: 0 6px 18px rgba(20,23,26,.08);
   --shadow-lg: 0 12px 32px rgba(20,23,26,.12);
-  --shadow-blue: 0 10px 24px rgba(11,95,255,.32);
+  --shadow-brand: 0 10px 24px rgba(101,188,123,.32);
 
   /* Espaçamento */
   --s-1: 4px;
@@ -55,7 +55,8 @@
   --s-8: 32px;
 
   /* Tipografia */
-  --font: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Comfortaa', 'Montserrat', sans-serif;  /* logo/display */
 }
 
 /* ------------------------------ RESET ----------------------------------- */
@@ -140,7 +141,7 @@ img { max-width: 100%; display: block; }
 }
 
 /* logo wordmark */
-.logo { font-weight: 700; font-size: 26px; letter-spacing: -.5px; color: var(--blue); }
+.logo { font-weight: 700; font-size: 26px; letter-spacing: -.5px; color: var(--primary); }
 .logo.on-blue { color: #fff; }
 .logo.lg { font-size: 40px; }
 
@@ -162,7 +163,7 @@ img { max-width: 100%; display: block; }
   padding: var(--s-2) 0;
 }
 .nav-item .ico { font-size: 20px; line-height: 1; }
-.nav-item.active { color: var(--blue); }
+.nav-item.active { color: var(--primary); }
 .nav-item.active .ico { transform: translateY(-1px); }
 
 /* botão central de pagamento (QR) em destaque circular */
@@ -171,10 +172,10 @@ img { max-width: 100%; display: block; }
   width: 62px; height: 62px;
   margin-top: -26px;
   border-radius: var(--r-pill);
-  background: var(--blue);
+  background: var(--primary);
   color: #fff;
   display: grid; place-items: center;
-  box-shadow: var(--shadow-blue);
+  box-shadow: var(--shadow-brand);
   border: 4px solid var(--surface);
   font-size: 24px;
 }
@@ -192,11 +193,11 @@ img { max-width: 100%; display: block; }
   background: var(--gray-100);
 }
 .btn:active { transform: scale(.97); }
-.btn-primary { background: var(--blue); color: #fff; box-shadow: var(--shadow-blue); }
-.btn-primary:active { background: var(--blue-700); }
+.btn-primary { background: var(--primary); color: #fff; box-shadow: var(--shadow-brand); }
+.btn-primary:active { background: var(--primary-700); }
 .btn-yellow { background: var(--yellow); color: var(--ink); }
-.btn-ghost { background: transparent; color: var(--blue); }
-.btn-outline { background: transparent; color: var(--blue); box-shadow: inset 0 0 0 1.5px var(--blue); }
+.btn-ghost { background: transparent; color: var(--primary); }
+.btn-outline { background: transparent; color: var(--primary); box-shadow: inset 0 0 0 1.5px var(--primary); }
 .btn-danger { background: var(--red-50); color: var(--red); }
 .btn-block { display: flex; width: 100%; }
 .btn-sm { padding: 9px 16px; font-size: 13px; }
@@ -204,11 +205,11 @@ img { max-width: 100%; display: block; }
 
 /* ----------------------------- BALANCE CARD ----------------------------- */
 .balance-card {
-  background: linear-gradient(135deg, #0B5FFF 0%, #2E7BFF 55%, #0846C4 100%);
+  background: linear-gradient(135deg, #65BC7B 0%, #2E7BFF 55%, #4A9A5E 100%);
   color: #fff;
   border-radius: var(--r-lg);
   padding: var(--s-5);
-  box-shadow: var(--shadow-blue);
+  box-shadow: var(--shadow-brand);
   position: relative;
   overflow: hidden;
 }
@@ -238,7 +239,7 @@ img { max-width: 100%; display: block; }
   transition: transform .08s ease;
 }
 .quick-action:active .ico { transform: scale(.94); }
-.quick-action .ico.blue { background: var(--blue-50); }
+.quick-action .ico.blue { background: var(--primary-50); }
 .quick-action .ico.yellow { background: #FFF6CC; }
 
 /* ------------------------------- CHIPS ---------------------------------- */
@@ -249,7 +250,7 @@ img { max-width: 100%; display: block; }
   font-size: 14px; font-weight: 600; color: var(--ink);
   transition: all .12s ease;
 }
-.chip.selected { background: var(--blue); color: #fff; box-shadow: var(--shadow-blue); }
+.chip.selected { background: var(--primary); color: #fff; box-shadow: var(--shadow-brand); }
 .chip-row { display: flex; flex-wrap: wrap; gap: var(--s-2); }
 .chip.sm { padding: 6px 12px; font-size: 12px; }
 
@@ -268,7 +269,7 @@ img { max-width: 100%; display: block; }
   margin: var(--s-5) 0 var(--s-3);
 }
 .section-head h2 { font-size: 16px; font-weight: 600; }
-.section-head a { font-size: 13px; color: var(--blue); font-weight: 600; }
+.section-head a { font-size: 13px; color: var(--primary); font-weight: 600; }
 
 /* ------------------------------ LISTS ----------------------------------- */
 .list {
@@ -283,7 +284,7 @@ img { max-width: 100%; display: block; }
 .list-item .ico {
   width: 42px; height: 42px; border-radius: var(--r-pill);
   display: grid; place-items: center; font-size: 18px;
-  background: var(--blue-50); flex: 0 0 auto;
+  background: var(--primary-50); flex: 0 0 auto;
 }
 .list-item .body { flex: 1; min-width: 0; }
 .list-item .body .t { font-size: 14.5px; font-weight: 600; }
@@ -361,14 +362,14 @@ img { max-width: 100%; display: block; }
   font-size: 11.5px; font-weight: 600;
   background: var(--gray-100); color: var(--gray);
 }
-.badge.blue { background: var(--blue-50); color: var(--blue); }
+.badge.blue { background: var(--primary-50); color: var(--primary); }
 .badge.green { background: var(--green-50); color: var(--green); }
 .badge.yellow { background: #FFF6CC; color: var(--yellow-700); }
 .badge.red { background: var(--red-50); color: var(--red); }
 
 /* ------------------------------ PROGRESS -------------------------------- */
 .progress { height: 10px; border-radius: var(--r-pill); background: var(--gray-100); overflow: hidden; }
-.progress .bar { height: 100%; border-radius: var(--r-pill); background: linear-gradient(90deg, var(--blue), #2E7BFF); }
+.progress .bar { height: 100%; border-radius: var(--r-pill); background: linear-gradient(90deg, var(--primary), #2E7BFF); }
 .progress.yellow .bar { background: linear-gradient(90deg, var(--yellow), #FFE45C); }
 
 /* ------------------------- CLUBE / REWARDS ------------------------------ */
@@ -402,7 +403,7 @@ img { max-width: 100%; display: block; }
 .mission-row .body { flex: 1; }
 .mission-row .body .t { font-size: 14px; font-weight: 600; }
 .mission-row .body .s { font-size: 12px; color: var(--gray); }
-.mission-row .pts { font-size: 13px; font-weight: 700; color: var(--blue); }
+.mission-row .pts { font-size: 13px; font-weight: 700; color: var(--primary); }
 
 /* ------------------------------- TOAST ---------------------------------- */
 .toast {
@@ -443,7 +444,7 @@ img { max-width: 100%; display: block; }
   background: var(--surface); box-shadow: inset 0 0 0 1.5px var(--gray-100);
   font-family: inherit; font-size: 15px; color: var(--ink);
 }
-.field:focus { outline: none; box-shadow: inset 0 0 0 1.5px var(--blue); }
+.field:focus { outline: none; box-shadow: inset 0 0 0 1.5px var(--primary); }
 .field-label { font-size: 13px; font-weight: 600; color: var(--gray); margin-bottom: 6px; display: block; }
 
 /* hero amount input (recarga) */
@@ -455,7 +456,7 @@ img { max-width: 100%; display: block; }
   min-height: 100%; display: flex; flex-direction: column;
   justify-content: center; align-items: center; text-align: center;
   padding: var(--s-8) var(--s-6);
-  background: linear-gradient(160deg, #0B5FFF 0%, #0846C4 100%);
+  background: linear-gradient(160deg, #65BC7B 0%, #4A9A5E 100%);
   color: #fff;
 }
 .hero h1 { font-size: 28px; font-weight: 700; margin: var(--s-4) 0 var(--s-2); }
@@ -536,7 +537,7 @@ img { max-width: 100%; display: block; }
     <div class="amt out">−R$ 4,30</div>
   </div>
 
-  <div class="card mt-5" onclick="navigate('clube')" style="background:linear-gradient(135deg,var(--blue),var(--blue-700));color:#fff;cursor:pointer">
+  <div class="card mt-5" onclick="navigate('clube')" style="background:linear-gradient(135deg,var(--primary),var(--primary-700));color:#fff;cursor:pointer">
     <div class="row between">
       <div class="col" style="gap:4px">
         <div class="card-title" style="color:#fff">Clube Jaé ⭐</div>
@@ -569,7 +570,7 @@ img { max-width: 100%; display: block; }
     <div class="qr">
       <svg viewBox="0 0 200 200" width="200" height="200" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
         <rect width="200" height="200" fill="#fff"/>
-        <g fill="#14171A">
+        <g fill="#232323">
           <rect x="10" y="10" width="50" height="50"/>
           <rect x="20" y="20" width="30" height="30" fill="#fff"/>
           <rect x="28" y="28" width="14" height="14"/>
