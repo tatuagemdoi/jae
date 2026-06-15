@@ -8,3 +8,6 @@ build/
 # Espelho fiel do site da Jaé — material de marca de terceiro.
 # Mantido só localmente; NÃO versionado neste repositório público.
 landing/
+
+# Desktop derivado do espelho (material de marca) — local apenas
+landing-desktop/

@@ -495,6 +495,22 @@ img { max-width: 100%; display: block; }
 .event .price { text-align: right; flex: none; }
 .event .price .v { font-weight: 700; font-size: 14px; }
 .event .price .free { color: var(--green); font-weight: 700; font-size: 13px; }
+
+/* --------------------------- COMO CHEGAR / TRAJETO ---------------------- */
+.map-mock { position: relative; height: 200px; border-radius: var(--r-lg); overflow: hidden; background: linear-gradient(135deg,#dbe7e0,#cfe9e4); box-shadow: var(--shadow-sm); }
+.map-mock .pin { position: absolute; font-size: 22px; transform: translate(-50%,-50%); filter: drop-shadow(0 2px 3px rgba(0,0,0,.3)); }
+.eta-card { background: var(--ink); color: #fff; border-radius: var(--r-lg); padding: var(--s-5); box-shadow: var(--shadow-brand); }
+.eta-card .big { font-family: var(--font-display); font-weight: 700; font-size: 34px; line-height: 1; }
+.mode-tabs { display: flex; gap: var(--s-2); }
+.mode-tab { flex: 1; text-align: center; padding: var(--s-3) 4px; border-radius: var(--r-md); border: 1px solid var(--gray-300); font-weight: 600; font-size: 12.5px; background: var(--surface); cursor: pointer; }
+.mode-tab.active { background: var(--primary-50); border-color: var(--primary); color: var(--primary-700); }
+.route-step { display: flex; gap: var(--s-3); align-items: center; padding: var(--s-2) 0; }
+.route-step .leg { width: 34px; height: 34px; flex: none; border-radius: 50%; display: grid; place-items: center; font-size: 15px; color: #fff; }
+.route-step .leg.walk { background: var(--gray); }
+.route-step .leg.brt { background: var(--primary); }
+.route-step .body .t { font-weight: 600; font-size: 14px; }
+.route-step .body .s { font-size: 12px; color: var(--gray); }
+.route-step .time { margin-left: auto; font-weight: 700; font-size: 13px; white-space: nowrap; }
   </style>
 </head>
 <body>
@@ -1241,7 +1257,7 @@ img { max-width: 100%; display: block; }
   <div class="card mb-4" style="background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff">
     <div class="card-title" style="color:#fff">Vai de Jaé 🚌</div>
     <div class="card-sub" style="color:rgba(255,255,255,.9)">Comprou ingresso? A gente te mostra a melhor rota e você paga a passagem aqui mesmo.</div>
-    <button class="btn btn-yellow btn-block mt-3" onclick="navigate('pagar')">Ver rota e pagar passagem</button>
+    <button class="btn btn-yellow btn-block mt-3" onclick="navigate('trajeto')">Ver rota e pagar passagem</button>
   </div>
 
   <!-- sheet de compra de ingresso -->
@@ -1269,6 +1285,100 @@ img { max-width: 100%; display: block; }
       <button class="btn btn-primary btn-block" onclick="closeSheet('comprar-ingresso'); showToast('Ingresso comprado! 🎟️ Disponível em Meus ingressos')">Pagar com Pix</button>
       <button class="btn btn-outline btn-block mt-2" onclick="closeSheet('comprar-ingresso')">Cancelar</button>
     </div>
+  </div>
+
+  <nav class="bottom-nav">
+    <a class="nav-item" data-nav="inicio" onclick="navigate('inicio')"><span class="ico">🏠</span><span>Início</span></a>
+    <a class="nav-item" data-nav="extrato" onclick="navigate('extrato')"><span class="ico">📃</span><span>Extrato</span></a>
+    <a class="nav-pay" onclick="navigate('pagar')">⊞</a>
+    <a class="nav-item" data-nav="cartoes" onclick="navigate('cartoes')"><span class="ico">💳</span><span>Cartões</span></a>
+    <a class="nav-item active" data-nav="cidade" onclick="navigate('cidade')"><span class="ico">🎟️</span><span>Cidade</span></a>
+  </nav>
+</section>
+
+<!-- ===================== TELA: COMO CHEGAR / TRAJETO ===================== -->
+<section class="screen" id="screen-trajeto">
+  <div class="app-bar solid">
+    <button class="back" onclick="navigate('cidade')" aria-label="Voltar">‹</button>
+    <span class="title">Como chegar</span>
+    <span class="spacer"></span>
+  </div>
+
+  <!-- origem / destino -->
+  <div class="list mb-3">
+    <div class="list-item">
+      <span class="ico blue">📍</span>
+      <div class="body"><div class="t">Sua localização</div><div class="s">Usando GPS atual</div></div>
+      <span class="badge green">GPS</span>
+    </div>
+    <div class="divider"></div>
+    <div class="list-item">
+      <span class="ico">🏁</span>
+      <div class="body"><div class="t">Marina da Glória</div><div class="s">Av. Infante Dom Henrique · evento</div></div>
+      <span class="chev">›</span>
+    </div>
+  </div>
+
+  <!-- mapa (placeholder — substituir por react-native-maps) -->
+  <div class="map-mock mb-3">
+    <svg viewBox="0 0 320 200" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%">
+      <g stroke="#b9cdc4" stroke-width="6" fill="none" opacity=".7">
+        <path d="M-10,150 H330"/><path d="M60,-10 V210"/><path d="M-10,60 H330"/><path d="M230,-10 V210"/>
+      </g>
+      <path d="M55,150 C110,150 120,80 160,70 C210,58 230,60 270,55" stroke="#65BC7B" stroke-width="5" fill="none" stroke-linecap="round" stroke-dasharray="2 9"/>
+    </svg>
+    <span class="pin" style="left:17%;top:75%">🔵</span>
+    <span class="pin" style="left:84%;top:27%">📍</span>
+  </div>
+
+  <!-- modos -->
+  <div class="mode-tabs mb-3">
+    <div class="mode-tab active" onclick="showToast('Rota por transporte público')">🚌 Transporte</div>
+    <div class="mode-tab" onclick="showToast('Rota de carro (Routes API)')">🚗 Carro</div>
+    <div class="mode-tab" onclick="showToast('Rota a pé')">🚶 A pé</div>
+  </div>
+
+  <!-- ETA -->
+  <div class="eta-card mb-3">
+    <div class="row between" style="align-items:flex-end">
+      <div>
+        <div class="small" style="color:#bdbdbd">Tempo estimado</div>
+        <div class="big">38 min</div>
+      </div>
+      <div style="text-align:right">
+        <div class="small" style="color:#bdbdbd">Distância</div>
+        <div class="bold" style="font-size:18px">9,2 km</div>
+      </div>
+    </div>
+    <div class="small mt-2" style="color:#9bd4a8">🟢 Trânsito tranquilo agora · chega 18h42</div>
+  </div>
+
+  <!-- passos da rota -->
+  <div class="section-head"><h2>Sua rota</h2></div>
+  <div class="card mb-3">
+    <div class="route-step">
+      <span class="leg walk">🚶</span>
+      <div class="body"><div class="t">Caminhe até o BRT Jardim Oceânico</div><div class="s">450 m</div></div>
+      <span class="time">6 min</span>
+    </div>
+    <div class="divider"></div>
+    <div class="route-step">
+      <span class="leg brt">🚌</span>
+      <div class="body"><div class="t">BRT Transcarioca · sentido Centro</div><div class="s">12 paradas · tarifa R$ 4,30</div></div>
+      <span class="time">24 min</span>
+    </div>
+    <div class="divider"></div>
+    <div class="route-step">
+      <span class="leg walk">🚶</span>
+      <div class="body"><div class="t">Caminhe até a Marina da Glória</div><div class="s">600 m</div></div>
+      <span class="time">8 min</span>
+    </div>
+  </div>
+
+  <button class="btn btn-primary btn-block" onclick="navigate('pagar')">Pagar passagem · R$ 4,30</button>
+  <div class="row gap-2 mt-2 mb-4">
+    <button class="btn btn-outline btn-block" onclick="showToast('Abrindo no Waze… (deep link)')">Abrir no Waze</button>
+    <button class="btn btn-outline btn-block" onclick="showToast('Abrindo no Google Maps…')">Google Maps</button>
   </div>
 
   <nav class="bottom-nav">
