@@ -532,6 +532,17 @@ img { max-width: 100%; display: block; }
     </div>
   </div>
 
+  <div class="section-head mt-4">
+    <h2>Acontece no Rio 🎟️</h2>
+    <a onclick="navigate('cidade')">ver tudo</a>
+  </div>
+  <div class="city-hero" onclick="navigate('cidade')" style="cursor:pointer">
+    <span class="badge-cat">🎶 Show</span>
+    <h3>Festival de Verão · Marina da Glória</h3>
+    <div class="meta">Sáb, 28 jun · a partir de R$ 80 · ingressos pelo app</div>
+    <button class="btn btn-yellow btn-sm mt-3" onclick="event.stopPropagation(); navigate('cidade')">Comprar ingresso</button>
+  </div>
+
   <div class="quick-actions mt-4">
     <div class="quick-action" onclick="navigate('recarregar')">
       <span class="ico blue">⚡</span>
@@ -574,17 +585,6 @@ img { max-width: 100%; display: block; }
       <span class="chev" style="color:#fff">›</span>
     </div>
   </div>
-
-  <div class="section-head mt-5">
-    <h2>Acontece no Rio</h2>
-    <a onclick="navigate('cidade')">ver tudo</a>
-  </div>
-  <div class="city-hero" onclick="navigate('cidade')" style="cursor:pointer">
-    <span class="badge-cat">🎶 Show</span>
-    <h3>Festival de Verão · Marina da Glória</h3>
-    <div class="meta">Sáb, 28 jun · a partir de R$ 80 · ingressos pelo app</div>
-  </div>
-  <p class="small muted text-center mt-3">Descubra rolês, gastronomia e cultura — e pague a ida com a Jaé 🎟️</p>
 
   <div class="text-center muted small mt-5 mb-4">Vem ser Jaé 💚</div>
 </section>
@@ -958,6 +958,17 @@ img { max-width: 100%; display: block; }
         <span>Faltam 250 pts para o Ouro</span>
       </div>
       <div class="progress yellow"><div class="bar" style="width:71%"></div></div>
+    </div>
+  </div>
+
+  <!-- Acesso ao guia da cidade (benefício) -->
+  <div class="card mt-3" onclick="navigate('cidade')" style="background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;cursor:pointer">
+    <div class="row between">
+      <div class="col" style="gap:4px">
+        <div class="card-title" style="color:#fff">Acontece no Rio 🎟️</div>
+        <div class="card-sub" style="color:rgba(255,255,255,.9)">Shows, gastronomia e cultura · compre ingressos e use pontos em parceiros</div>
+      </div>
+      <span class="chev" style="color:#fff">›</span>
     </div>
   </div>
 
