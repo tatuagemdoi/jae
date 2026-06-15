@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jaé · Style Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;700&family=Montserrat:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="design-tokens/tokens.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--font-body);
+    color: var(--color-text);
+    background: var(--color-bg);
+    line-height: var(--lh-normal);
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: var(--space-12) var(--space-6); }
+  header.hero {
+    background: var(--color-bg-inverse);
+    color: var(--color-text-inverse);
+    border-radius: var(--radius-lg);
+    padding: var(--space-16) var(--space-12);
+    display: flex; align-items: center; gap: var(--space-8); flex-wrap: wrap;
+  }
+  .hero .badge {
+    background: var(--color-primary); color: #fff;
+    font-family: var(--font-display); font-weight: var(--fw-bold);
+    font-size: var(--fs-3xl); width: 110px; height: 110px;
+    border-radius: var(--radius-lg);
+    display: grid; place-items: center; flex: none;
+  }
+  .hero h1 { font-family: var(--font-display); font-size: var(--fs-2xl); font-weight: 700; }
+  .hero p { color: #bdbdbd; margin-top: var(--space-2); max-width: 46ch; }
+
+  section { margin-top: var(--space-16); }
+  .eyebrow {
+    font-size: var(--fs-xs); letter-spacing: .14em; text-transform: uppercase;
+    font-weight: var(--fw-bold); color: var(--color-primary-hover);
+  }
+  h2 { font-family: var(--font-display); font-size: var(--fs-xl); font-weight: 700; margin: var(--space-2) 0 var(--space-6); }
+
+  /* ---- cores ---- */
+  .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px,1fr)); gap: var(--space-4); }
+  .sw { border: 1px solid var(--color-border); border-radius: var(--radius-md); overflow: hidden; }
+  .sw .chip { height: 92px; }
+  .sw .meta { padding: var(--space-3) var(--space-4); }
+  .sw .name { font-weight: var(--fw-bold); font-size: var(--fs-sm); }
+  .sw .hex { font-size: var(--fs-xs); color: var(--color-text-muted); text-transform: uppercase; font-family: ui-monospace, monospace; }
+
+  /* ---- tipografia ---- */
+  .type-row { padding: var(--space-4) 0; border-bottom: 1px dashed var(--color-border); display:flex; align-items:baseline; gap: var(--space-6); flex-wrap: wrap; }
+  .type-row .tag { font-size: var(--fs-xs); color: var(--color-text-muted); width: 130px; flex: none; font-family: ui-monospace, monospace; }
+
+  /* ---- componentes ---- */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); }
+  @media (max-width: 720px){ .grid2 { grid-template-columns: 1fr; } }
+  .card { border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--space-8); }
+  .btn {
+    font-family: var(--font-body); font-weight: var(--fw-bold); font-size: var(--fs-base);
+    border: none; cursor: pointer; border-radius: var(--radius-pill);
+    padding: var(--space-3) var(--space-8);
+  }
+  .btn-primary { background: var(--color-primary); color:#fff; }
+  .btn-primary:hover { background: var(--color-primary-hover); }
+  .btn-secondary { background: var(--color-secondary); color: var(--jae-ink-900); }
+  .btn-ghost { background: transparent; color: var(--color-primary-hover); box-shadow: inset 0 0 0 2px var(--color-primary); }
+  .btn-dark { background: var(--color-bg-inverse); color:#fff; }
+  .row { display: flex; gap: var(--space-4); flex-wrap: wrap; align-items: center; margin-bottom: var(--space-6); }
+
+  .pill { display:inline-block; padding: 4px 14px; border-radius: var(--radius-pill); font-size: var(--fs-xs); font-weight: var(--fw-bold); }
+  .pill-grat { background: var(--color-secondary); color:#5a4400; }
+  .pill-teal { background: var(--color-accent); color:#003d37; }
+  .pill-ok   { background: var(--color-surface-muted); color: var(--color-primary-hover); }
+
+  .radii { display:flex; gap: var(--space-6); flex-wrap: wrap; }
+  .radii div { width: 90px; }
+  .radii .box { height: 70px; background: var(--color-surface-muted); border: 2px solid var(--color-primary); }
+  .radii small { font-family: ui-monospace, monospace; font-size: var(--fs-xs); color: var(--color-text-muted); }
+
+  .space-demo { display:flex; align-items:flex-end; gap: var(--space-4); }
+  .space-demo div { background: var(--color-primary); width: 28px; }
+  .space-demo span { display:block; text-align:center; font-size:10px; color: var(--color-text-muted); margin-top:4px; font-family: ui-monospace,monospace; }
+
+  footer { margin-top: var(--space-24); padding-top: var(--space-8); border-top: 1px solid var(--color-border); color: var(--color-text-muted); font-size: var(--fs-sm); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="badge">Jaé</div>
+    <div>
+      <h1>Style Guide — Jaé</h1>
+      <p>Identidade visual extraída do site oficial, organizada como sistema de design para o redesign do app.</p>
+    </div>
+  </header>
+
+  <!-- LOGO -->
+  <section>
+    <div class="eyebrow">01 · Logo</div>
+    <h2>Marca</h2>
+    <div class="grid2">
+      <div class="card" style="display:grid;place-items:center;min-height:160px;">
+        <img src="landing/assets/LOGO-JAE-footer-908e33.png" alt="Logo Jaé" style="max-width:220px;height:auto;">
+      </div>
+      <div class="card" style="display:grid;place-items:center;min-height:160px;background:var(--color-bg-inverse);">
+        <img src="landing/assets/LOGO-JAE-footer-908e33.png" alt="Logo Jaé (negativo)" style="max-width:220px;height:auto;filter:invert(1) brightness(2);">
+      </div>
+    </div>
+  </section>
+
+  <!-- CORES -->
+  <section>
+    <div class="eyebrow">02 · Cores</div>
+    <h2>Paleta</h2>
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:#65bc7b"></div><div class="meta"><div class="name">Verde Jaé ★</div><div class="hex">#65BC7B</div></div></div>
+      <div class="sw"><div class="chip" style="background:#4a9a5e"></div><div class="meta"><div class="name">Verde hover</div><div class="hex">#4A9A5E</div></div></div>
+      <div class="sw"><div class="chip" style="background:#ffc107"></div><div class="meta"><div class="name">Amarelo</div><div class="hex">#FFC107</div></div></div>
+      <div class="sw"><div class="chip" style="background:#ffaf00"></div><div class="meta"><div class="name">Âmbar</div><div class="hex">#FFAF00</div></div></div>
+      <div class="sw"><div class="chip" style="background:#2ed5c4"></div><div class="meta"><div class="name">Turquesa</div><div class="hex">#2ED5C4</div></div></div>
+      <div class="sw"><div class="chip" style="background:#232323"></div><div class="meta"><div class="name">Tinta (texto)</div><div class="hex">#232323</div></div></div>
+      <div class="sw"><div class="chip" style="background:#404040"></div><div class="meta"><div class="name">Cinza texto</div><div class="hex">#404040</div></div></div>
+      <div class="sw"><div class="chip" style="background:#e2e2e2"></div><div class="meta"><div class="name">Borda</div><div class="hex">#E2E2E2</div></div></div>
+      <div class="sw"><div class="chip" style="background:#eaf6ed"></div><div class="meta"><div class="name">Verde 50 (fundo)</div><div class="hex">#EAF6ED</div></div></div>
+      <div class="sw"><div class="chip" style="background:#000;"></div><div class="meta"><div class="name">Preto</div><div class="hex">#000000</div></div></div>
+    </div>
+  </section>
+
+  <!-- TIPOGRAFIA -->
+  <section>
+    <div class="eyebrow">03 · Tipografia</div>
+    <h2>Fontes & escala</h2>
+    <p style="color:var(--color-text-muted);margin-bottom:var(--space-6)">
+      <strong style="font-family:var(--font-display)">Comfortaa</strong> para display/logo ·
+      <strong>Montserrat</strong> para títulos e corpo.
+    </p>
+    <div class="type-row"><span class="tag">Display 3xl</span><span style="font-family:var(--font-display);font-size:var(--fs-3xl);font-weight:700">Vem ser Jaé</span></div>
+    <div class="type-row"><span class="tag">H1 · 2xl/800</span><span style="font-size:var(--fs-2xl);font-weight:800">Sua passagem, num só lugar</span></div>
+    <div class="type-row"><span class="tag">H2 · xl/700</span><span style="font-size:var(--fs-xl);font-weight:700">Pague pelo celular</span></div>
+    <div class="type-row"><span class="tag">H3 · lg/700</span><span style="font-size:var(--fs-lg);font-weight:700">Recarregue em segundos</span></div>
+    <div class="type-row"><span class="tag">Body · base/400</span><span style="font-size:var(--fs-base)">Texto de corpo em Montserrat regular para leitura confortável na interface do app.</span></div>
+    <div class="type-row"><span class="tag">Small · sm/500</span><span style="font-size:var(--fs-sm);font-weight:500">Legenda e textos de apoio</span></div>
+  </section>
+
+  <!-- COMPONENTES -->
+  <section>
+    <div class="eyebrow">04 · Componentes</div>
+    <h2>Botões & elementos</h2>
+    <div class="card">
+      <div class="row">
+        <button class="btn btn-primary">Abrir conta</button>
+        <button class="btn btn-secondary">Gratuidade</button>
+        <button class="btn btn-ghost">Saiba mais</button>
+        <button class="btn btn-dark">Baixar app</button>
+      </div>
+      <div class="row">
+        <span class="pill pill-ok">● Ativo</span>
+        <span class="pill pill-grat">Gratuidade</span>
+        <span class="pill pill-teal">Jaézinho</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- RAIO + ESPAÇO -->
+  <section>
+    <div class="eyebrow">05 · Forma & espaçamento</div>
+    <h2>Raio de borda</h2>
+    <div class="radii">
+      <div><div class="box" style="border-radius:8px"></div><small>sm · 8</small></div>
+      <div><div class="box" style="border-radius:16px"></div><small>md · 16</small></div>
+      <div><div class="box" style="border-radius:24px"></div><small>lg · 24</small></div>
+      <div><div class="box" style="border-radius:999px"></div><small>pill</small></div>
+    </div>
+    <h2 style="margin-top:var(--space-12)">Escala de espaçamento (base 4px)</h2>
+    <div class="space-demo">
+      <div><div style="height:4px"></div><span>4</span></div>
+      <div><div style="height:8px"></div><span>8</span></div>
+      <div><div style="height:12px"></div><span>12</span></div>
+      <div><div style="height:16px"></div><span>16</span></div>
+      <div><div style="height:24px"></div><span>24</span></div>
+      <div><div style="height:32px"></div><span>32</span></div>
+      <div><div style="height:48px"></div><span>48</span></div>
+      <div><div style="height:64px"></div><span>64</span></div>
+    </div>
+  </section>
+
+  <footer>
+    Jaé · Style Guide gerado a partir de jae.com.br — tokens em <code>design-tokens/tokens.css</code> e <code>tokens.json</code>.<br>
+    Material de marca da Jaé. Uso interno para o projeto de redesign.
+  </footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,10 @@
+node_modules/
+.DS_Store
+*.log
+dist/
+build/
+.expo/
+
+# Espelho fiel do site da Jaé — material de marca de terceiro.
+# Mantido só localmente; NÃO versionado neste repositório público.
+landing/
