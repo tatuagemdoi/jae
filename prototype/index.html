@@ -511,6 +511,16 @@ img { max-width: 100%; display: block; }
 .route-step .body .t { font-weight: 600; font-size: 14px; }
 .route-step .body .s { font-size: 12px; color: var(--gray); }
 .route-step .time { margin-left: auto; font-weight: 700; font-size: 13px; white-space: nowrap; }
+
+/* botão "como chegar" por evento + ingressos */
+.event .price { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+.evt-go { border: 1px solid var(--gray-300); background: var(--surface); border-radius: var(--r-pill); width: 30px; height: 30px; font-size: 14px; line-height: 1; cursor: pointer; }
+.evt-go:hover { border-color: var(--primary); }
+.ticket { background: var(--surface); border: 1px solid var(--gray-100); border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--shadow-sm); margin-bottom: var(--s-3); }
+.ticket .head { background: var(--ink); color: #fff; padding: var(--s-4) var(--s-5); display: flex; gap: var(--s-4); align-items: center; }
+.ticket .head .qr { width: 54px; height: 54px; background: #fff; border-radius: var(--r-sm); display: grid; place-items: center; flex: none; }
+.ticket .head .qr .in { width: 40px; height: 40px; background: var(--ink); border-radius: 3px; }
+.ticket .body { padding: var(--s-4) var(--s-5); }
   </style>
 </head>
 <body>
@@ -1199,6 +1209,7 @@ img { max-width: 100%; display: block; }
     <button class="back" onclick="navigate('inicio')" aria-label="Voltar">‹</button>
     <span class="title">Acontece no Rio</span>
     <span class="spacer"></span>
+    <button class="icon-btn" onclick="navigate('ingressos')" title="Meus ingressos">🎟️</button>
     <button class="icon-btn" onclick="showToast('Busca em breve')">🔍</button>
   </div>
 
@@ -1233,7 +1244,7 @@ img { max-width: 100%; display: block; }
         <div class="t">Mostra de Teatro · Theatro Municipal</div>
         <div class="s">Qui, 19 jun · 20h · Centro</div>
       </div>
-      <div class="price"><div class="v">R$ 40</div></div>
+      <div class="price"><div class="v">R$ 40</div><button class="evt-go" onclick="navigate('trajeto')">🧭</button></div>
     </div>
     <div class="event">
       <div class="thumb">🍽️</div>
@@ -1241,7 +1252,7 @@ img { max-width: 100%; display: block; }
         <div class="t">Feira Gastronômica · Jardim Botânico</div>
         <div class="s">Dom, 22 jun · 12h · entrada gratuita</div>
       </div>
-      <div class="price"><div class="free">Grátis</div></div>
+      <div class="price"><div class="free">Grátis</div><button class="evt-go" onclick="navigate('trajeto')">🧭</button></div>
     </div>
     <div class="event">
       <div class="thumb">🎶</div>
@@ -1249,7 +1260,7 @@ img { max-width: 100%; display: block; }
         <div class="t">Roda de Samba · Pedra do Sal</div>
         <div class="s">Sex, 20 jun · 19h · Saúde</div>
       </div>
-      <div class="price"><div class="v">R$ 25</div></div>
+      <div class="price"><div class="v">R$ 25</div><button class="evt-go" onclick="navigate('trajeto')">🧭</button></div>
     </div>
     <div class="event">
       <div class="thumb">⚽</div>
@@ -1257,7 +1268,7 @@ img { max-width: 100%; display: block; }
         <div class="t">Fla x Flu · Maracanã</div>
         <div class="s">Sáb, 28 jun · 16h · Maracanã</div>
       </div>
-      <div class="price"><div class="v">R$ 60</div></div>
+      <div class="price"><div class="v">R$ 60</div><button class="evt-go" onclick="navigate('trajeto')">🧭</button></div>
     </div>
   </div>
 
@@ -1289,7 +1300,7 @@ img { max-width: 100%; display: block; }
         <div class="row between"><span class="bold">Total</span><span class="bold">R$ 88,00</span></div>
       </div>
 
-      <button class="btn btn-primary btn-block" onclick="closeSheet('comprar-ingresso'); showToast('Ingresso comprado! 🎟️ Disponível em Meus ingressos')">Pagar com Pix</button>
+      <button class="btn btn-primary btn-block" onclick="closeSheet('comprar-ingresso'); navigate('ingressos'); showToast('Ingresso comprado! 🎟️')">Pagar com Pix</button>
       <button class="btn btn-outline btn-block mt-2" onclick="closeSheet('comprar-ingresso')">Cancelar</button>
     </div>
   </div>
@@ -1387,6 +1398,61 @@ img { max-width: 100%; display: block; }
     <button class="btn btn-outline btn-block" onclick="showToast('Abrindo no Waze… (deep link)')">Abrir no Waze</button>
     <button class="btn btn-outline btn-block" onclick="showToast('Abrindo no Google Maps…')">Google Maps</button>
   </div>
+
+  <nav class="bottom-nav">
+    <a class="nav-item" data-nav="inicio" onclick="navigate('inicio')"><span class="ico">🏠</span><span>Início</span></a>
+    <a class="nav-item" data-nav="extrato" onclick="navigate('extrato')"><span class="ico">📃</span><span>Extrato</span></a>
+    <a class="nav-pay" onclick="navigate('pagar')">⊞</a>
+    <a class="nav-item" data-nav="cartoes" onclick="navigate('cartoes')"><span class="ico">💳</span><span>Cartões</span></a>
+    <a class="nav-item active" data-nav="cidade" onclick="navigate('cidade')"><span class="ico">🎟️</span><span>Cidade</span></a>
+  </nav>
+</section>
+
+<!-- ===================== TELA: MEUS INGRESSOS ===================== -->
+<section class="screen" id="screen-ingressos">
+  <div class="app-bar solid">
+    <button class="back" onclick="navigate('cidade')" aria-label="Voltar">‹</button>
+    <span class="title">Meus ingressos</span>
+    <span class="spacer"></span>
+  </div>
+
+  <div class="section-head"><h2>Próximos</h2></div>
+
+  <div class="ticket">
+    <div class="head">
+      <div class="qr"><div class="in"></div></div>
+      <div>
+        <div class="bold" style="font-size:15px">Festival de Verão</div>
+        <div class="small" style="color:#bdbdbd">Marina da Glória · Sáb, 28 jun · 18h</div>
+        <span class="badge green" style="margin-top:6px;display:inline-block">1 ingresso · Inteira</span>
+      </div>
+    </div>
+    <div class="body">
+      <div class="row gap-2">
+        <button class="btn btn-primary btn-block" onclick="navigate('trajeto')">🧭 Como chegar</button>
+        <button class="btn btn-outline btn-block" onclick="showToast('Mostrando QR de entrada')">Ver QR</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="ticket">
+    <div class="head">
+      <div class="qr"><div class="in"></div></div>
+      <div>
+        <div class="bold" style="font-size:15px">Roda de Samba · Pedra do Sal</div>
+        <div class="small" style="color:#bdbdbd">Sex, 20 jun · 19h · Saúde</div>
+        <span class="badge green" style="margin-top:6px;display:inline-block">2 ingressos</span>
+      </div>
+    </div>
+    <div class="body">
+      <div class="row gap-2">
+        <button class="btn btn-primary btn-block" onclick="navigate('trajeto')">🧭 Como chegar</button>
+        <button class="btn btn-outline btn-block" onclick="showToast('Mostrando QR de entrada')">Ver QR</button>
+      </div>
+    </div>
+  </div>
+
+  <p class="small muted text-center mt-3 mb-4">Seus ingressos ficam salvos aqui, até offline 🎟️</p>
 
   <nav class="bottom-nav">
     <a class="nav-item" data-nav="inicio" onclick="navigate('inicio')"><span class="ico">🏠</span><span>Início</span></a>
