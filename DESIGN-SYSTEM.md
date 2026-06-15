@@ -77,3 +77,16 @@ O `prototype/` foi **realinhado** ao verde oficial:
 | `clube.html` | *(a fazer)* | Card, Pill, Button |
 
 `LoginScreen` (RN) não tem equivalente no protótipo — é tela nova.
+
+### Integração RN das novas features (paridade com o protótipo)
+Telas do guia/geolocalização agora também em React Native:
+
+| Protótipo | Tela RN (`app/`) | Componentes |
+|---|---|---|
+| `screen-cidade` | `CityScreen` ✅ | Chip, Pill, Button, TabBar |
+| `screen-trajeto` | `RouteScreen` ✅ | Chip, ListItem, Button (mapa = placeholder) |
+| `screen-ingressos` | `TicketsScreen` ✅ | Pill, Button |
+
+Novo componente: **Chip** (filtros da Cidade / modos de rota).
+`RouteScreen` traz comentários apontando a integração real: **react-native-maps**
++ **Google Routes API** (ver `docs/geolocalizacao-rotas-api.md`).
